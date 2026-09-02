@@ -1,0 +1,17 @@
+build/
+.vscode/
+indices/
+.cache/
+data/*
+data-example/*
+figures/*
+scripts/tests/drop_cache
+*.log
+log/
+*.pdf
+tmp/
+*.svg
+*.png
+*.csv
+*.data
+*.old

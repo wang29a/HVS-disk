@@ -1,0 +1,4 @@
+./shell/preprocess.sh
+# ./build/tests/reorder_by_map 500000 132 /gauss_yusong/ljh_data/freshdiskann_output/deep50w/disk_init_pq64/disk_index_graph /gauss_yusong/ljh_data/freshdiskann_output/deep50w/disk_init_pq64/reorder_map_graph_2 /gauss_yusong/ljh_data/freshdiskann_output/deep50w/disk_init_pq64/reordered_disk_index_graph_2
+# ./build/tests/reorder_by_map 500000 384 /gauss_yusong/ljh_data/freshdiskann_output/deep50w/disk_init_pq64/disk_index_data /gauss_yusong/ljh_data/freshdiskann_output/deep50w/disk_init_pq64/reorder_map_data_2 /gauss_yusong/ljh_data/freshdiskann_output/deep50w/disk_init_pq64/reordered_disk_index_data_2
+# ./shell/run_exp2.sh

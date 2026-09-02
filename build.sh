@@ -1,0 +1,6 @@
+export ADDITIONAL_DEFINITIONS="-DREORDER_COMPUTE_PQ -DUSE_TOPO_DISK"
+
+mkdir build
+cd build
+cmake -DBUILD_WITH_PQ=ON -DCMAKE_CXX_COMPILER=g++-11 ..
+make -j
