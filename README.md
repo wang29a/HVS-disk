@@ -4,6 +4,8 @@
 
 这份交接包只保留实现、构建文件和运行脚本，不包含论文草稿、写作材料、实验图片、日志、数据集、索引文件和编译产物。Git 历史已压缩为一个交接基线提交；后续开发可以直接在此基础上创建分支和提交。
 
+当前交接版本为 `ea4ac09`。第一次接手时，先在 Linux/node3 上运行 `git status --short --branch` 和 `git log -1 --oneline` 确认版本，再按这条唯一主线执行：第 4 节编译并构建 Full-alpha，第 7.1/7.2 节转换 No-alpha/Merge-alpha，第 7.3 节让三种格式分别执行 Starling，最后使用第 7.3.5 节的 `mode=6、mem_L=0、strategy=17` 命令搜索。第 6 节只用于兼容性检查历史 OpenImages 原始索引，不是三方案端到端实验的主入口。
+
 ## 外部 Starling 仓库
 
 hvs-disk 的 page-aware graph partition 与 topology relayout 依赖外部 Starling，实现不包含在本交接仓库中。统一使用：
@@ -114,7 +116,7 @@ cmake --build build -j
 
 不要盲目运行 `build.sh`：它固定使用 `g++-11`，并且旧写法假设 `build/` 不存在。优先使用上面的 `cmake -S/-B` 命令。
 
-### 4.3 从原始双空间向量构建：当前验证结论
+### 4.1 从原始双空间向量构建：当前验证结论
 
 当前代码已修复分离式构建：`single_file_index=0` 会输出 Full-alpha 的 `_disk.index`、`disk_index_graph` 和 `disk_index_data`，而不是错误地始终生成 Merge-alpha `single_index`。Full 构建完成后，再使用 `merge_alpha` 生成 Merge-alpha；两种格式分别执行 Starling，不能共享 reorder 顺序。
 
@@ -149,7 +151,7 @@ topology size=4,554,752B
 
 两种格式均完成 8 轮 Starling、relayout、aligned partition、全量 reorder 字节校验和带匹配 ground truth 的搜索，详细结果见 7.3.4。`single_file_index=1` 的旧 mode 0 路径仍不是当前交接主流程；`tests/split_index.cpp` 仍是不能处理本格式的 4096B 遗留工具。
 
-### 4.4 推荐的正式索引流水线
+### 4.2 推荐的正式索引流水线
 
 目标流水线应保持以下顺序，尤其不要在不同记录宽度之间复用 reorder map：
 
@@ -264,13 +266,7 @@ cmake --build build -j8
 
 `BUILD_WITH_PQ=ON` 允许编译 PQ 生成逻辑，已验证不影响加载现有 PQ 文件进行搜索。2026-05 的旧 DGAI 搜索二进制使用 `BUILD_WITH_PQ=OFF`，但搜索所需的关键宏同样是 `REORDER_COMPUTE_PQ` 和 `USE_TOPO_DISK`。
 
-如果代码从 macOS 复制到 Linux，先检查是否混入 AppleDouble 文件：
-
-```bash
-find . -name '._*' -print
-```
-
-这些文件会被 CMake 的 `*.cpp` GLOB 误认为源码。最终压缩或传输时应排除 `._*` 和 `__MACOSX/`；使用 tar 时可以在 macOS 设置 `COPYFILE_DISABLE=1`。
+若交接压缩包中出现 `._*` 或 `__MACOSX/`，删除后再配置 CMake；这只是打包清理事项，不属于实验流程。
 
 ### 6.3 已验证的搜索命令
 
@@ -386,6 +382,8 @@ Laion 上的三个目录都是 Starling relayout 入口，其中的符号链接�
 
 **No-alpha 已恢复可用。** 修复前 `mode=6, strategy=17` 的 `Mean Cmps=0`、Recall@10=0 是空 range 被当作“不激活”的 reader bug，不是索引损坏或搜索参数错误。修复后在原 Laion 10,642,155-node No-alpha relayout 上，L=40 得到 Mean Cmps=1795.34、Recall@10=88.46%；L=100 得到 Mean Cmps=2777.66、Recall@10=95.40%。命令仍使用 `mode=6, mem_L=0, strategy=17`。不要再切换到不兼容该 relayout 的 mode 3。
 
+加载时出现 `_disk.index.alpha` 缺失警告，只表示旧的独立 alpha sidecar 不存在；`mode=6、strategy=17` 的 Full/Merge 主路径仍从 topology record 内读取 alpha ranges。不要把该警告解释为 Full/Merge 已退化成 No-alpha。最直接的核对方式是比较 Mean Cmps：同一 L 下 No-alpha 应明显高于 Full/Merge。
+
 ## 7. 主要可执行程序与索引工具链
 
 成功构建后，可执行程序位于 `build/tests/` 或 `build/tests/utils/`。常用入口包括：
@@ -475,6 +473,8 @@ git clone --recurse-submodules \
   /mnt/nvme3/wz/starling-wang29a
 
 cd /mnt/nvme3/wz/starling-wang29a
+git checkout 7437c4848a83e7bf62558c5eab1eb999feed8537
+git submodule update --init --recursive
 cmake -S . -B release-gcc11-abi0 \
   -DCMAKE_BUILD_TYPE=Release \
   -DCMAKE_C_COMPILER=gcc-11 \
@@ -507,7 +507,8 @@ g++-11 -std=c++14 -O2 -mavx2 -include immintrin.h \
 
 ```bash
 cd /mnt/nvme3/wz/starling-wang29a
-export LD_LIBRARY_PATH="$PWD/release-gcc11-abi0/gnu_11.4_cxx17_64_release:$LD_LIBRARY_PATH"
+set -o pipefail
+export LD_LIBRARY_PATH=/opt/gcc-11.4/lib64:$PWD/release-gcc11-abi0/gnu_11.4_cxx17_64_release:$LD_LIBRARY_PATH
 
 ./release-gcc11-abi0/graph_partition/partitioner \
   --data_type float \
@@ -527,6 +528,8 @@ cd /mnt/nvme3/wz/hvs-disk
 # 输出：<partition.bin>.aligned
 ```
 
+node3 必须把 `/opt/gcc-11.4/lib64` 放在系统运行库之前，否则 partitioner 会误载 GCC 4.8 的 `libstdc++`，并报 `GLIBCXX_3.4.29` 或 `CXXABI_1.3.9 not found`。命令经过 `tee` 保存日志时应先启用 `set -o pipefail`，否则 partitioner 失败后整条流水线仍可能返回 0。
+
 `-L` 是 LDG partition 轮数，不是搜索的 `L_search`。本次快速正确性验证使用 `-L 1`；正式构建建议使用仓库惯例 `-L 8`，并记录线程数和 commit。
 
 当前 fork 的 custom relayout 会生成 `<relayout_topology>_meta.bin`，但它只复制 4096B metadata，而 hvs-disk 要求完整 8192B metadata 页。**不要安装这个 4KB 文件。** 当前记录宽度没有变化，搜索目录应继续使用该方案转换阶段生成的原 8192B `<meta>`；relayout 只替换 topology，并配套使用刚生成的 `.aligned` partition。
@@ -541,6 +544,23 @@ cd /mnt/nvme3/wz/hvs-disk
 ```
 
 外部 Starling 不负责生成 PQ、精确双向量或 alpha 压缩。推荐先在 hvs-disk 内完成 Full/Merge/No-alpha 格式选择，再把对应 topology 交给 Starling。外部工具输出后，应将同一方案的 metadata、relayout topology、partition 文件和共享 coord/PQ 文件放入一个独立目录，通过统一名称或符号链接供 loader 使用；不要混用不同方案的文件。
+
+每种方案的 `search/` 目录必须向 loader 提供下面八个名字；其中 metadata、relayout topology 和 partition 属于该方案，coord 和两套 PQ 文件可以共享同一次 Full 构建产物：
+
+```bash
+root=/path/to/experiment
+kind=full  # 分别替换为 full、merge、no-alpha
+mkdir -p "$root/$kind/search"
+ln -s ../_disk.index "$root/$kind/search/_disk.index"
+ln -s ../disk_index_graph.relayout "$root/$kind/search/disk_index_graph"
+ln -s ../partition.bin.aligned "$root/$kind/search/_partition.bin.aligned"
+ln -s ../../full/disk_index_data "$root/$kind/search/disk_index_data"
+ln -s ../../full/emb_pq_compressed.bin "$root/$kind/search/emb_pq_compressed.bin"
+ln -s ../../full/emb_pq_pivots.bin "$root/$kind/search/emb_pq_pivots.bin"
+ln -s ../../full/loc_pq_compressed.bin "$root/$kind/search/loc_pq_compressed.bin"
+ln -s ../../full/loc_pq_pivots.bin "$root/$kind/search/loc_pq_pivots.bin"
+find -L "$root/$kind/search" -maxdepth 1 -type f -printf '%f %s\n' | sort
+```
 
 如果接手环境没有上述指定 Starling：可以先完成 Full/Merge/No-alpha 转换和格式校验，但不能运行 `mode=6, strategy=17` 的 Starling page-rerank，也不能据此报告最终性能。仓库内的遗留 reorder 工具不能代替外部 Starling。
 
@@ -653,6 +673,24 @@ No-alpha 比 Full/Merge 比较更多邻居是预期行为，因为它不进行 a
 对 Laion 现有 Full 和 No-alpha relayout 已完成 10,642,155 节点全量校验：缺失节点、重复节点、越界 neighbor ID、超 degree 记录和逐节点 neighbor-list mismatch 均为 0；修复 reader 后的搜索也已通过。
 
 `tests/check_reorder_topo.cpp` 仍包含 4096B page、132B record 和旧绝对路径的硬编码，不能直接用来验证当前 8192B 双空间索引。
+
+#### 7.3.6 2026-09-10 从干净代码目录重新验证
+
+交接提交 `ea4ac09` 已重新同步到 node3 的独立目录 `/mnt/nvme3/wz/hvs-disk-validation-20260910`。本轮删除了对旧代码、旧编译目录和旧索引输出的依赖，从 CMake 配置、Full 构建、Merge/No-alpha 转换开始，三种格式分别执行指定 Starling 的 8 轮 partition、custom relayout、partition 对齐和统一搜索。只复用了与这批 10K base 严格匹配的 query、alpha 和 ground truth 输入。
+
+严格校验中，三种方案均覆盖恰好 10,000 个唯一 ID，缺失、重复、越界、超页容量、ID-to-partition 映射错误、非法 degree、非法 neighbor、非法 interval 和逐条 topology record mismatch 全部为 0。完整结果和逐步日志保存在 `validation-run/logs/`，机器可读摘要为 `08_validation_summary.json`。
+
+统一搜索参数为 100 queries、8 threads、I/O width 4、Recall@10、`mode=6、mem_L=0、strategy=17`：
+
+| L_search | Full Recall / Mean I/O | Merge Recall / Mean I/O | No-alpha Recall / Mean I/O |
+|---:|---:|---:|---:|
+| 20 | 74.30% / 26.63 | 74.30% / 23.96 | 76.40% / 18.76 |
+| 40 | 84.10% / 38.34 | 84.10% / 33.61 | 85.00% / 27.30 |
+| 80 | 92.00% / 62.62 | 92.00% / 54.08 | 92.40% / 44.02 |
+| 100 | 94.10% / 74.95 | 94.10% / 64.04 | 94.50% / 52.26 |
+| 200 | 97.30% / 133.11 | 97.30% / 112.01 | 97.40% / 87.58 |
+
+本轮 Full 与 Merge 的 Recall 完全一致，Merge 的 Mean I/O 更低；No-alpha 的 Mean Cmps 更高但页面更密，因而 Mean I/O 更低。这是 10K 正确性与流程验收，不是正式性能结论。重新运行时允许 QPS、延迟和 Recall 有小幅变化，但结构校验中的所有错误计数和 record mismatch 必须严格为 0。
 
 ### 7.4 重排后的最低校验清单
 
@@ -908,7 +946,6 @@ git switch -c feature/<任务名>
 - 部分实验配置通过编译宏和直接改源码切换，复现实验前要保存完整配置。
 - `scripts/`、`shell/` 和 `_scripts/` 的时效性不同；优先使用 `scripts/`，旧脚本需要逐项验证。
 - 当前构建系统偏 Linux，依赖和服务器环境需要另行交接。
-- macOS 打包可能产生 `._*` AppleDouble 文件；它们会被 CMake 的源码 GLOB 误编译，交接包必须排除。
 - `/mnt/nvme3/wz/Index/Openimage-shard` 不是当前正确性基准；使用索引前必须记录完整路径和生成版本。
 - `tests/check_reorder_topo.cpp` 仍是 4096B/132B 的旧工具，不能直接校验当前索引。
 - No-alpha 不做 alpha range 剪枝，Mean Cmps 高于 Full/Merge 是预期行为；仍需在匹配 recall 下比较 I/O、QPS 和延迟。
