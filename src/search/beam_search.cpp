@@ -529,7 +529,7 @@ namespace pipeann {
             }
             use_range.emplace_back(alpha1, alpha2);
           }
-          bool search_flag = false;
+          bool search_flag = (max_alpha_range_len == 0);
           for (size_t i = 0; i < use_range.size(); i++) {
             if (alpha * 100 >= use_range[i].first && alpha * 100 <= use_range[i].second) {
               search_flag = true;

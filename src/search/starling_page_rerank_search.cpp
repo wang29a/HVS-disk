@@ -244,7 +244,10 @@ namespace pipeann {
             for (unsigned m = 0; m < nnbrs; ++m) {
               uint32_t neighbor_id = *(uint32_t *)((char *)node_nbrs_raw + m * nbr_data_len);
               const uint8_t *alpha_ptr = (const uint8_t *)node_nbrs_raw + m * nbr_data_len + sizeof(uint32_t);
-              bool search_flag = false;
+              // No-alpha topology stores only neighbor IDs. With zero range
+              // slots every edge is active, so do not enter the range filter
+              // with a false default.
+              bool search_flag = (max_alpha_range_len == 0);
               for (uint32_t k = 0; k < max_alpha_range_len; ++k) {
                 int8_t a1 = (int8_t)alpha_ptr[k * 2];
                 int8_t a2 = (int8_t)alpha_ptr[k * 2 + 1];

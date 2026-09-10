@@ -1301,10 +1301,13 @@ namespace pipeann {
     // enterpoint_set_size = 1;
     // enterpoint_set.emplace_back(0);
 
-    uint32_t single_neighbor_size = sizeof(uint32_t) + (2 * kMergedMaxAlphaRangeLen * sizeof(int8_t));
+    const bool compress_alpha = merge_method == 2 || merge_method == 3;
+    uint32_t output_max_alpha_range_len =
+        compress_alpha ? kMergedMaxAlphaRangeLen : max_alpha_range_len;
+    uint32_t single_neighbor_size =
+        sizeof(uint32_t) + (2 * output_max_alpha_range_len * sizeof(int8_t));
     size_t fixed_topo_size = sizeof(uint32_t) + (max_nbr_len * single_neighbor_size);
     uint64_t nnodes_per_sector = PAGE_SIZE / fixed_topo_size;
-    uint32_t output_max_alpha_range_len = kMergedMaxAlphaRangeLen;
 
     // 写入 Meta Data (按照 save_graph_disk 的对齐逻辑)
     std::remove(output_meta_file.c_str());
@@ -1327,7 +1330,9 @@ namespace pipeann {
     copy_meta(&nnodes_per_sector, sizeof(uint64_t));
     copy_meta(&enterpoint_set_size, sizeof(uint32_t));
     copy_meta(enterpoint_set.data(), sizeof(uint32_t) * enterpoint_set_size);
-    LOG(INFO) << "nnodes " << node_num << " emb dim " << emb_dim << " loc dim " << loc_dim << " nbrs " << max_nbr_len << " alpha len " << nnodes_per_sector;
+    LOG(INFO) << "nnodes " << node_num << " emb dim " << emb_dim << " loc dim " << loc_dim
+              << " nbrs " << max_nbr_len << " alpha len " << output_max_alpha_range_len
+              << " nodes/page " << nnodes_per_sector;
     LOG(INFO) << "ep size: " << enterpoint_set_size ;
     
     out_meta.write(meta_buffer.data(), aligned_meta_size);
@@ -1396,7 +1401,7 @@ namespace pipeann {
     std::ofstream out_data(output_data_file, std::ios::binary);
     std::vector<char> data_page_buf(PAGE_SIZE, 0);
     size_t data_off = 0;
-    size_t single_node_data_size = (ndims1 + ndims2) * sizeof(float);
+    size_t single_node_data_size = (ndims1 + ndims2) * sizeof(T);
     
     std::vector<char> node_data_tmp(single_node_data_size, 0);
 
@@ -1428,7 +1433,8 @@ namespace pipeann {
 
     // 记录单个邻居结构在定长布局中的总字节数
     // [ID(4B)] + [Max_Alpha_Range_Len * 2 * int8_t]
-    const size_t range_total_bytes_per_nbr = 2 * kMergedMaxAlphaRangeLen * sizeof(int8_t);
+    const size_t range_total_bytes_per_nbr =
+        2 * output_max_alpha_range_len * sizeof(int8_t);
     const size_t single_nbr_fixed_size = sizeof(uint32_t) + range_total_bytes_per_nbr;
 
     for (size_t i = 0; i < node_num; i++) {
@@ -1470,13 +1476,15 @@ namespace pipeann {
                 std::memcpy(ptr, &neighbor_id, sizeof(uint32_t));
                 char* range_ptr = ptr + sizeof(uint32_t);
 
-                // Merge ranges then write (at most kMergedMaxAlphaRangeLen pairs)
-                auto merged_ranges = merge_alpha_ranges(temp_ranges, merge_method);
-                unsigned actual_ranges_to_copy = std::min((unsigned)merged_ranges.size(), kMergedMaxAlphaRangeLen);
+                auto output_ranges = compress_alpha
+                    ? merge_alpha_ranges(temp_ranges, merge_method)
+                    : temp_ranges;
+                unsigned actual_ranges_to_copy =
+                    std::min((unsigned)output_ranges.size(), output_max_alpha_range_len);
                 for (unsigned r = 0; r < actual_ranges_to_copy; r++) {
-                    std::memcpy(range_ptr, &merged_ranges[r].first, sizeof(int8_t));
+                    std::memcpy(range_ptr, &output_ranges[r].first, sizeof(int8_t));
                     range_ptr += sizeof(int8_t);
-                    std::memcpy(range_ptr, &merged_ranges[r].second, sizeof(int8_t));
+                    std::memcpy(range_ptr, &output_ranges[r].second, sizeof(int8_t));
                     range_ptr += sizeof(int8_t);
                 }
                 // 指针移动到下一个邻居的起始位置 (single_nbr_fixed_size 包含了所有的 Padding)
@@ -2078,10 +2086,16 @@ namespace pipeann {
                 << kMergedMaxAlphaRangeLen << " pairs per neighbor";
     }
     // if (tag_file == nullptr) {
-      // pipeann::create_disk_layout<T, TagT>(mem_index_path, normalized_file_path1, normalized_file_path2, medoids_path,
-      //                                      single_file_index, disk_meta_path, disk_graph_path, disk_data_path);
-      pipeann::create_disk_layout_single_file_aligned<T, TagT>(mem_index_path, normalized_file_path1, normalized_file_path2,
-                                          medoids_path, disk_single_path, merge_method);
+      if (single_file_index) {
+        pipeann::create_disk_layout_single_file_aligned<T, TagT>(
+            mem_index_path, normalized_file_path1, normalized_file_path2,
+            medoids_path, disk_single_path, merge_method);
+      } else {
+        pipeann::create_disk_layout<T, TagT>(
+            mem_index_path, normalized_file_path1, normalized_file_path2,
+            medoids_path, false, disk_meta_path, disk_graph_path,
+            disk_data_path, merge_method);
+      }
     // } else {
     //   std::string tag_filename = std::string(tag_file);
     //   pipeann::create_disk_layout<T, TagT>(mem_index_path, normalized_file_path, tag_filename, pq_pivots_path,
