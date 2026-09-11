@@ -36,9 +36,63 @@ Then derive Merge-alpha and No-alpha from that same Full-alpha metadata and topo
   "$EXP_ROOT/no-alpha/_disk.index" "$EXP_ROOT/no-alpha/disk_index_graph"
 ```
 
-Run the external Starling implementation pinned in `README.md` separately for `full`, `merge`, and `no-alpha`. For each layout, use its own metadata and topology to produce its own `partition.bin`, relayout topology, and `partition.bin.aligned`. Never reuse a partition or reorder mapping across layouts: their record widths and nodes-per-page differ. After relayout, retain the original 8192-byte metadata file; do not install Starling's 4096-byte generated metadata copy.
+## External Starling code and relayout
 
-Each layout's `search/` directory must expose its own `_disk.index`, relayout topology as `disk_index_graph`, and aligned partition as `_partition.bin.aligned`. It may share `disk_index_data`, both `*_pq_compressed.bin` files, and both `*_pq_pivots.bin` files from the Full build. The exact Starling and symlink commands are in `README.md` Section 7.3.
+Starling is an external implementation and is not vendored in this repository. Use only [wang29a/starling](https://github.com/wang29a/starling) at the verified revision below; do not substitute another repository with the same name:
+
+```bash
+export STARLING_ROOT=/mnt/nvme3/wz/starling-wang29a
+
+git clone --recurse-submodules https://github.com/wang29a/starling.git "$STARLING_ROOT"
+cd "$STARLING_ROOT"
+git checkout 7437c4848a83e7bf62558c5eab1eb999feed8537
+git submodule update --init --recursive
+
+cmake -S . -B release-gcc11-abi0 \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DCMAKE_C_COMPILER=gcc-11 \
+  -DCMAKE_CXX_COMPILER=g++-11 \
+  -DCMAKE_CXX_FLAGS=-D_GLIBCXX_USE_CXX11_ABI=0 \
+  -DTBB_ENABLE_IPO=OFF
+cmake --build release-gcc11-abi0 -j8 --target partitioner
+```
+
+On node3, oneTBB also needs the documented WAITPKG compatibility changes before it builds. The custom relayout executable is compiled separately from `tests/utils/index_relayout.cpp`. Follow `README.md` Section 7.3.1 exactly for these two steps; the default Starling benchmark scripts operate on standard DiskANN layouts and do not replace the hvs-disk custom path.
+
+Run Starling independently for `full`, `merge`, and `no-alpha`. `ENTRYPOINT_COUNT` comes from that layout's metadata/build log. `-L 8` is the Starling LDG round count, not the ANN search depth:
+
+```bash
+export HVS_ROOT=/path/to/HVS-disk
+export KIND=full                 # repeat with merge and no-alpha
+export ENTRYPOINT_COUNT=12       # read the actual value from metadata
+
+cd "$STARLING_ROOT"
+set -o pipefail
+export LD_LIBRARY_PATH=/opt/gcc-11.4/lib64:$STARLING_ROOT/release-gcc11-abi0/gnu_11.4_cxx17_64_release:$LD_LIBRARY_PATH
+
+./release-gcc11-abi0/graph_partition/partitioner \
+  --data_type float \
+  --gp_file "$EXP_ROOT/$KIND/partition.bin" \
+  --custom_graph 1 \
+  --graph_file "$EXP_ROOT/$KIND/disk_index_graph" \
+  --meta_file "$EXP_ROOT/$KIND/_disk.index" \
+  --ep_size "$ENTRYPOINT_COUNT" \
+  -T 16 -L 8
+
+./release-gcc11-abi0/tests/utils/index_relayout_custom \
+  --custom \
+  "$EXP_ROOT/$KIND/disk_index_graph" \
+  "$EXP_ROOT/$KIND/_disk.index" \
+  "$EXP_ROOT/$KIND/partition.bin" \
+  "$EXP_ROOT/$KIND/disk_index_graph.relayout"
+
+cd "$HVS_ROOT"
+./build/tests/pad_partition "$EXP_ROOT/$KIND/partition.bin"
+```
+
+Never reuse a partition or reorder mapping across layouts: their record widths and nodes-per-page differ. After relayout, retain the original 8192-byte metadata file; do not install Starling's generated 4096-byte metadata copy. The partitioner must load GCC 11's `libstdc++` before the system GCC 4.8 library on node3.
+
+Each layout's `search/` directory must expose its own `_disk.index`, relayout topology as `disk_index_graph`, and aligned partition as `_partition.bin.aligned`. It may share `disk_index_data`, both `*_pq_compressed.bin` files, and both `*_pq_pivots.bin` files from the Full build. The exact symlink commands and required eight filenames are in `README.md` Section 7.3.2.
 
 ## Search
 
