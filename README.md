@@ -186,9 +186,11 @@ cmake --build build-single-baseline -j8 --target search_disk_index
   20 40 80 100 200
 ```
 
-2026-09-12 在 node3 上使用 10,000 条 OpenImages base 和 100 条匹配查询完成了这条路径的实测。程序与日志管道均返回 0；Recall@10 在 `L=20/40/80/100/200` 时分别为 `76.70%/86.60%/93.40%/94.50%/97.70%`。验证目录为 `/mnt/nvme3/wz/hvs-disk-validation-20260910/single-file-validation-20260912/`，配置、编译和搜索日志分别是 `03_configure_no_mapping.log`、`04_build_search_no_mapping.log` 和 `05_search_mode0_no_mapping.log`。
+2026-09-12 在 node3 上使用 10,000 条 OpenImages base 和 100 条匹配查询完成了这条路径的实测。修正后的 single-file writer 在不压缩时继承构建期实际 `max_alpha_range_len`，只有显式选择 merge method 2/3 时才压缩到两个 ranges；它还按模板类型 `sizeof(T)` 计算向量区长度，不再把 `int8/uint8` 当作 `float` 布局。
 
-**当前限制：这条路径可以执行，但当前 writer 还不是严格的 Full-alpha single-file baseline。** `create_disk_layout_single_file_aligned()` 将磁盘记录的 `max_alpha_range_len` 固定为 `2`，并且最多写入每条边的前两个 range；node3 产物的 header 也是 `max_alpha_range_len=2`。因此当前结果只能称为“单文件、无解耦、无 Starling 的 Disk+PQ 兼容 baseline”，不能声称其拓扑保存了全部原始 alpha ranges。若实验要求严格 Full-alpha single-file baseline，必须先修改 writer，让 range slot 数量来自构建结果并完整序列化，然后重新构建索引和 ground truth 对照；只调整编译宏无法补回已经在写盘时截断的 ranges。
+本次 Full-alpha 单文件 header 为 `node_num=10000, dims=768+768, max_nbr_len=54, max_alpha_range_len=5, nnodes_per_sector=0`。对 10,000 个节点逐项比较 `mem.index` 与 `single_index` 后，degree、neighbor ID 和所有 alpha range 的 mismatch 均为 0，构建期实际最大 range 数为 5。mode 0 搜索及日志管道均返回 0；Recall@10 在 `L=20/40/80/100/200` 时分别为 `77.20%/87.40%/93.20%/94.80%/98.20%`。验证目录为 `/mnt/nvme3/wz/hvs-disk-validation-20260910/single-file-full-alpha-validation-20260912/`，构建和搜索日志分别是 `01_build.log` 和 `02_search.log`。
+
+因此当前产物可以称为“Full-alpha 单文件、无解耦、无 Starling 的 Disk+PQ baseline”。它与解耦 Full-alpha 共享同一图构建语义和完整邻接信息，但磁盘布局及搜索 reader 不同。不要用旧的 `max_alpha_range_len=2` 单文件产物替代新 baseline；编译条件只能决定 reader，不能恢复旧产物在写盘时已经截断的 ranges。
 
 ### 4.3 推荐的正式索引流水线
 

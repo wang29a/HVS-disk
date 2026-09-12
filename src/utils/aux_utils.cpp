@@ -1545,9 +1545,12 @@ namespace pipeann {
 
       // 3. 计算布局参数
       uint32_t emb_dim = ndims1, loc_dim = ndims2;
-      size_t data_size = (emb_dim + loc_dim) * sizeof(float);
-      uint32_t output_max_alpha_range_len = kMergedMaxAlphaRangeLen;
-      uint32_t single_nbr_size = sizeof(uint32_t) + (2 * kMergedMaxAlphaRangeLen * sizeof(int8_t));
+      size_t data_size = (emb_dim + loc_dim) * sizeof(T);
+      const bool compress_alpha = merge_method == 2 || merge_method == 3;
+      uint32_t output_max_alpha_range_len =
+          compress_alpha ? kMergedMaxAlphaRangeLen : max_alpha_range_len;
+      uint32_t single_nbr_size =
+          sizeof(uint32_t) + (2 * output_max_alpha_range_len * sizeof(int8_t));
       size_t topo_size = sizeof(uint32_t) + (max_nbr_len * single_nbr_size);
       
       size_t total_node_content_size = data_size + topo_size;
@@ -1578,7 +1581,9 @@ namespace pipeann {
       // copy_m(&header_size, sizeof(uint64_t));       // 关键：数据区起始偏移
       copy_m(&ep_size, sizeof(uint32_t));
       copy_m(enterpoint_set.data(), sizeof(uint32_t) * ep_size);
-      LOG(INFO) << "nnodes " << node_num << " emb dim " << emb_dim << " loc dim " << loc_dim << " nbrs " << max_nbr_len << " alpha len " << nnodes_per_sector;
+      LOG(INFO) << "nnodes " << node_num << " emb dim " << emb_dim << " loc dim " << loc_dim
+                << " nbrs " << max_nbr_len << " alpha len " << output_max_alpha_range_len
+                << " nodes/page " << nnodes_per_sector;
       LOG(INFO) << "ep size: " << ep_size << " aligned node size" << aligned_node_size << " header size" << header_size;
       
       out.write(header_buffer.data(), header_size);
@@ -1620,11 +1625,14 @@ namespace pipeann {
                   for (unsigned t = 0; t < r_size; t++) {
                       temp_ranges.push_back({r_data[t * 2], r_data[t * 2 + 1]});
                   }
-                  auto merged = merge_alpha_ranges(temp_ranges, merge_method);
-                  unsigned to_copy = std::min((unsigned)merged.size(), kMergedMaxAlphaRangeLen);
+                  auto output_ranges = compress_alpha
+                      ? merge_alpha_ranges(temp_ranges, merge_method)
+                      : temp_ranges;
+                  unsigned to_copy =
+                      std::min((unsigned)output_ranges.size(), output_max_alpha_range_len);
                   for (unsigned r = 0; r < to_copy; r++) {
-                      std::memcpy(nbr_ptr + sizeof(uint32_t) + r * 2, &merged[r].first, sizeof(int8_t));
-                      std::memcpy(nbr_ptr + sizeof(uint32_t) + r * 2 + 1, &merged[r].second, sizeof(int8_t));
+                      std::memcpy(nbr_ptr + sizeof(uint32_t) + r * 2, &output_ranges[r].first, sizeof(int8_t));
+                      std::memcpy(nbr_ptr + sizeof(uint32_t) + r * 2 + 1, &output_ranges[r].second, sizeof(int8_t));
                   }
                   nbr_ptr += single_nbr_size;
               }

@@ -47,9 +47,9 @@ Run the baseline through search mode 0:
 
 The single-file metadata uses `nnodes_per_sector=0`, meaning one aligned node record per page. `NO_MAPPING` makes the logical node ID its physical location. Enabling `USE_TOPO_DISK` selects the separated topology/coordinate loader and causes division by zero during layout initialization; disabling it without enabling `NO_MAPPING` is also invalid because the generic mapping path rejects zero nodes per sector.
 
-This path was executed successfully on node3 with a 10,000-node OpenImages index and 100 queries. Recall@10 was 76.70%, 86.60%, 93.40%, 94.50%, and 97.70% for `L=20,40,80,100,200`. Logs are under `/mnt/nvme3/wz/hvs-disk-validation-20260910/single-file-validation-20260912/logs/`.
+This path was executed successfully on node3 with a 10,000-node OpenImages index and 100 queries. The corrected writer preserves the build-time `max_alpha_range_len` unless merge method 2 or 3 is explicitly selected. The resulting header had `max_alpha_range_len=5`; a full comparison against `mem.index` found zero degree, neighbor-ID, or alpha-range mismatches across all 10,000 nodes. Recall@10 was 77.20%, 87.40%, 93.20%, 94.80%, and 98.20% for `L=20,40,80,100,200`. Logs are under `/mnt/nvme3/wz/hvs-disk-validation-20260910/single-file-full-alpha-validation-20260912/logs/`.
 
-Do not describe the current artifact as a strict Full-alpha single-file baseline. The current `create_disk_layout_single_file_aligned()` writer fixes `max_alpha_range_len` to 2 and serializes at most two ranges per edge. Compile flags can make this artifact searchable, but they cannot restore ranges already truncated during serialization. A strict Full-alpha baseline requires a writer change, a rebuilt index, and fresh validation.
+The current artifact is a strict Full-alpha single-file baseline: it uses the same graph-build semantics and complete neighbor/range records as the separated Full-alpha layout, but a different physical layout and reader. Do not reuse an older single-file artifact whose header reports `max_alpha_range_len=2`; compile flags cannot restore ranges that were truncated when that file was written.
 
 ## Build the three index layouts
 
