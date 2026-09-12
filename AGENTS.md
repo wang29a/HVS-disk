@@ -12,6 +12,45 @@ cmake -S . -B build -DBUILD_WITH_PQ=ON -DCMAKE_CXX_COMPILER=g++-11
 cmake --build build -j8
 ```
 
+## Single-file Disk+PQ baseline
+
+The repository retains a compatibility baseline in which each 8192-byte aligned node page co-locates both exact vectors and the topology record. It does not split topology from coordinates and does not use Starling. Keep this build separate from the Full/Merge/No-alpha build because the compile-time layout assumptions are incompatible.
+
+Build the single-file index by setting the final `single_file_index` argument to `1`:
+
+```bash
+./build/tests/build_hybrid_disk_index \
+  float "$BASE_SPACE_1" "$BASE_SPACE_2" "$BASELINE_ROOT/index/" \
+  40 100 64 64 16 l2 1
+```
+
+Compile its search executable with `NO_MAPPING`, without `USE_TOPO_DISK` or `REORDER_COMPUTE_PQ`:
+
+```bash
+export ADDITIONAL_DEFINITIONS="-DNO_MAPPING"
+cmake -S . -B build-single-baseline \
+  -DBUILD_WITH_PQ=ON \
+  -DCMAKE_CXX_COMPILER=g++-11
+cmake --build build-single-baseline -j8 --target search_disk_index
+```
+
+Run the baseline through search mode 0:
+
+```bash
+./build-single-baseline/tests/search_disk_index \
+  float "$BASELINE_ROOT/index/" \
+  8 4 \
+  "$QUERY_SPACE_1" "$QUERY_SPACE_2" "$QUERY_ALPHA" "$GROUND_TRUTH" \
+  10 l2 0 0 0 \
+  20 40 80 100 200
+```
+
+The single-file metadata uses `nnodes_per_sector=0`, meaning one aligned node record per page. `NO_MAPPING` makes the logical node ID its physical location. Enabling `USE_TOPO_DISK` selects the separated topology/coordinate loader and causes division by zero during layout initialization; disabling it without enabling `NO_MAPPING` is also invalid because the generic mapping path rejects zero nodes per sector.
+
+This path was executed successfully on node3 with a 10,000-node OpenImages index and 100 queries. Recall@10 was 76.70%, 86.60%, 93.40%, 94.50%, and 97.70% for `L=20,40,80,100,200`. Logs are under `/mnt/nvme3/wz/hvs-disk-validation-20260910/single-file-validation-20260912/logs/`.
+
+Do not describe the current artifact as a strict Full-alpha single-file baseline. The current `create_disk_layout_single_file_aligned()` writer fixes `max_alpha_range_len` to 2 and serializes at most two ranges per edge. Compile flags can make this artifact searchable, but they cannot restore ranges already truncated during serialization. A strict Full-alpha baseline requires a writer change, a rebuilt index, and fresh validation.
+
 ## Build the three index layouts
 
 The two base matrices must use the headered binary format documented in `README.md`, contain the same number of rows, and use the same row-to-ID ordering. First build the Full-alpha index in separated-file mode (`single_file_index=0`):

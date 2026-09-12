@@ -151,7 +151,46 @@ topology size=4,554,752B
 
 两种格式均完成 8 轮 Starling、relayout、aligned partition、全量 reorder 字节校验和带匹配 ground truth 的搜索，详细结果见 7.3.4。`single_file_index=1` 的旧 mode 0 路径仍不是当前交接主流程；`tests/split_index.cpp` 仍是不能处理本格式的 4096B 遗留工具。
 
-### 4.2 推荐的正式索引流水线
+### 4.2 单文件 Disk+PQ baseline（兼容路径）
+
+仓库仍保留旧的单文件搜索路径，可用于检查“不做 topology/coordinate 解耦、不经过 Starling reorder”的 Disk+PQ baseline。它不是第 7 节 Full/Merge/No-alpha 三方案实验的主入口，必须使用独立构建目录和独立编译条件，不能复用带 `USE_TOPO_DISK` 的搜索二进制。
+
+构建单文件索引时，将最后一个参数设为 `1`：
+
+```bash
+./build/tests/build_hybrid_disk_index \
+  float "$BASE_SPACE_1" "$BASE_SPACE_2" "$BASELINE_ROOT/index/" \
+  40 100 64 64 16 l2 1
+```
+
+生成目录包含 `single_index`、两套 PQ pivots/compressed 文件、`medoids.bin` 和 `mem.index`。旧单文件布局把每个节点的两份精确向量和拓扑记录放在同一个 8192B 对齐页中，metadata 的 `nnodes_per_sector` 为 `0`。因此搜索端必须关闭 `USE_TOPO_DISK`，并启用 `NO_MAPPING`，让节点 ID 直接对应单文件中的物理位置：
+
+```bash
+export ADDITIONAL_DEFINITIONS="-DNO_MAPPING"
+cmake -S . -B build-single-baseline \
+  -DBUILD_WITH_PQ=ON \
+  -DCMAKE_CXX_COMPILER=g++-11
+cmake --build build-single-baseline -j8 --target search_disk_index
+```
+
+不要为这个 baseline 定义 `USE_TOPO_DISK` 或 `REORDER_COMPUTE_PQ`。`USE_TOPO_DISK` 面向解耦后的 topology/coordinate 页面布局，会使用 `ntopo_per_sector` 和 `ncoord_per_sector`；将它用于 `nnodes_per_sector=0` 的旧单文件 metadata 会在加载阶段触发除零错误。仅仅移除 `USE_TOPO_DISK` 也不够：若未定义 `NO_MAPPING`，通用 page mapping 初始化会拒绝 `nnodes_per_sector=0`。
+
+对应搜索入口是 `mode=0`：
+
+```bash
+./build-single-baseline/tests/search_disk_index \
+  float "$BASELINE_ROOT/index/" \
+  8 4 \
+  "$QUERY_SPACE_1" "$QUERY_SPACE_2" "$QUERY_ALPHA" "$GROUND_TRUTH" \
+  10 l2 0 0 0 \
+  20 40 80 100 200
+```
+
+2026-09-12 在 node3 上使用 10,000 条 OpenImages base 和 100 条匹配查询完成了这条路径的实测。程序与日志管道均返回 0；Recall@10 在 `L=20/40/80/100/200` 时分别为 `76.70%/86.60%/93.40%/94.50%/97.70%`。验证目录为 `/mnt/nvme3/wz/hvs-disk-validation-20260910/single-file-validation-20260912/`，配置、编译和搜索日志分别是 `03_configure_no_mapping.log`、`04_build_search_no_mapping.log` 和 `05_search_mode0_no_mapping.log`。
+
+**当前限制：这条路径可以执行，但当前 writer 还不是严格的 Full-alpha single-file baseline。** `create_disk_layout_single_file_aligned()` 将磁盘记录的 `max_alpha_range_len` 固定为 `2`，并且最多写入每条边的前两个 range；node3 产物的 header 也是 `max_alpha_range_len=2`。因此当前结果只能称为“单文件、无解耦、无 Starling 的 Disk+PQ 兼容 baseline”，不能声称其拓扑保存了全部原始 alpha ranges。若实验要求严格 Full-alpha single-file baseline，必须先修改 writer，让 range slot 数量来自构建结果并完整序列化，然后重新构建索引和 ground truth 对照；只调整编译宏无法补回已经在写盘时截断的 ranges。
+
+### 4.3 推荐的正式索引流水线
 
 目标流水线应保持以下顺序，尤其不要在不同记录宽度之间复用 reorder map：
 
