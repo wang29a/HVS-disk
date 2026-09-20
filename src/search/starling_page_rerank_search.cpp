@@ -392,7 +392,7 @@ namespace pipeann {
       memcpy(node_fp_coordsl_copy, node_buf + data_dim * sizeof(T), datal_dim * sizeof(T));
       // data_buf_idx++;
       float cur_expanded_diste = dist_cmp->compare(query_e, node_fp_coords_copy, (unsigned) data_dim);
-      float cur_expanded_distl = dist_cmp->compare(query_l, node_fp_coordsl_copy, (unsigned) data_dim);
+      float cur_expanded_distl = dist_cmp->compare(query_l, node_fp_coordsl_copy, (unsigned) datal_dim);
       float cur_expanded_dist = alpha*std::sqrt(cur_expanded_diste) + (1-alpha)*std::sqrt(cur_expanded_distl);
       exact_results.emplace_back(id, cur_expanded_dist);
     }
