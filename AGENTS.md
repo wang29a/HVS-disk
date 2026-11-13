@@ -181,3 +181,12 @@ Do not proceed when `git diff --exit-code` reports pre-existing source changes u
 ## Working rules
 
 Use `rg` for code discovery and preserve unrelated user changes. An 8192-byte page and fixed-width topology records are format invariants; layout changes must update metadata, builders, converters, offset helpers, all search readers, and Starling handling together. Do not commit datasets, generated indexes, build outputs, logs, or paper material. Do not run `git add`, `git commit`, `git push`, or destructive Git commands unless explicitly requested.
+
+
+## Archived preexperiment workflows
+
+Read `experiments/README.md` before using the research drivers. Directory names match the node3 runtime namespaces and retain sibling imports. Run `python3 experiments/check_sources.py` for archive identity and syntax checks; add `--unit` with NumPy installed for the existing short protocol tests. These checks do not launch experiments.
+
+The current research chain is `metric-consistent-20261111`, `laion-six-cell-20261111`, `alpha-mechanism-20261112`, then `topology-resident-three-arm-20261112`. Use tmux and the shared queue lock for timed work; the current search protocol uses four threads on NUMA 3, while graph construction has a separate capped allocation. Confirm host availability and input/build identities before resuming. Historical drivers retain their original resource settings and are not current defaults.
+
+The corrected weighted-Euclidean objective and conservative interval writer are isolated research implementations. Do not overwrite production sources with `sources/` snapshots or mix old indexes with the new library. Do not commit runtime analysis, state, datasets, GT, indexes, binaries, libraries, or vector snapshots. `relocate_checkpoints.py` is a manual recovery tool, not a normal experiment step.
