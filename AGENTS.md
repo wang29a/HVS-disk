@@ -1,6 +1,6 @@
 # hvs-disk Agent Guide
 
-hvs-disk is a C++17 implementation of SSD-resident dual-space graph ANN search. A query uses `alpha` to blend two distance spaces. The disk topology supports Full-alpha, Merge-alpha, and No-alpha layouts. Read `README.md` before running experiments; it is the authoritative source for binary formats, the verified Starling revision, node3 paths, parameter meanings, and expected results.
+hvs-disk is a C++17 implementation of SSD-resident dual-space graph ANN search. A query uses `alpha` to blend two distance spaces. The disk topology supports Full-alpha, Merge-alpha, and No-alpha layouts. Start with `README.md`. Use `docs/workflow.md` for the Full/Merge/No-alpha flow, `docs/data-format.md` for input formats, `docs/starling.md` for the verified external dependency, and `docs/baseline.md` for the separate single-file build. Research workflows live in `experiments/README.md`; machine configuration is in `experiments/RUNBOOK.md`.
 
 ## Build
 
@@ -96,7 +96,7 @@ cmake -S . -B release-gcc11-abi0 \
 cmake --build release-gcc11-abi0 -j8 --target partitioner
 ```
 
-On node3, oneTBB also needs the documented WAITPKG compatibility changes before it builds. The custom relayout executable is compiled separately from `tests/utils/index_relayout.cpp`. Follow `README.md` Section 7.3.1 exactly for these two steps; the default Starling benchmark scripts operate on standard DiskANN layouts and do not replace the hvs-disk custom path.
+On node3, oneTBB also needs the documented WAITPKG compatibility changes before it builds. The custom relayout executable is compiled separately from `tests/utils/index_relayout.cpp`. Follow `docs/starling.md` for these two steps; the default Starling benchmark scripts operate on standard DiskANN layouts and do not replace the hvs-disk custom path.
 
 Run Starling independently for `full`, `merge`, and `no-alpha`. `ENTRYPOINT_COUNT` comes from that layout's metadata/build log. `-L 8` is the Starling LDG round count, not the ANN search depth:
 
@@ -131,7 +131,7 @@ cd "$HVS_ROOT"
 
 Never reuse a partition or reorder mapping across layouts: their record widths and nodes-per-page differ. After relayout, retain the original 8192-byte metadata file; do not install Starling's generated 4096-byte metadata copy. The partitioner must load GCC 11's `libstdc++` before the system GCC 4.8 library on node3.
 
-Each layout's `search/` directory must expose its own `_disk.index`, relayout topology as `disk_index_graph`, and aligned partition as `_partition.bin.aligned`. It may share `disk_index_data`, both `*_pq_compressed.bin` files, and both `*_pq_pivots.bin` files from the Full build. The exact symlink commands and required eight filenames are in `README.md` Section 7.3.2.
+Each layout's `search/` directory must expose its own `_disk.index`, relayout topology as `disk_index_graph`, and aligned partition as `_partition.bin.aligned`. It may share `disk_index_data`, both `*_pq_compressed.bin` files, and both `*_pq_pivots.bin` files from the Full build. The exact symlink commands and required eight filenames are in `docs/workflow.md`.
 
 ## Search
 
@@ -152,7 +152,7 @@ Before accepting an index, require a complete partition bijection, valid neighbo
 
 ## Repository scripts
 
-The scripts under `scripts/` are inherited experiment drivers, not the canonical Full/Merge/No-alpha reproduction workflow. Use the explicit commands above and `README.md` Section 7.3 for the handoff validation. Do not use `shell/` or `_scripts/` as a substitute; those directories contain older PipeANN/OdinANN workflows and layouts.
+The scripts under `scripts/` are inherited experiment drivers, not the canonical Full/Merge/No-alpha reproduction workflow. Use the explicit commands above and `docs/workflow.md` for the handoff validation. Do not use `shell/` or `_scripts/` as a substitute; those directories contain older PipeANN/OdinANN workflows and layouts.
 
 Before using a repository script, read the entire file and inspect its changes:
 
