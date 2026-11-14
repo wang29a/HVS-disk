@@ -1,0 +1,9 @@
+/runtime/
+/bin/
+/build/
+/logs/
+/results/
+/analysis/
+/data/
+*.pyc
+__pycache__/
