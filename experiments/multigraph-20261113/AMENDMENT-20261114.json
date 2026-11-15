@@ -1,0 +1,19 @@
+{
+  "version": "three-layer-20261114",
+  "parent_readme_bytes": 10977,
+  "parent_readme_sha256": "0ebafa8672a6a00c43f8f0abb0b19b7f6dba595f23998156313c528e5bee10e5",
+  "append_sha256": "6e543abc1fa939db4775b3ab0fd0e5151f198d583dec8f24aed688a73c4164df",
+  "L": 20000,
+  "k": 320,
+  "mean_candidate_coverage_min": 0.99,
+  "query_candidate_coverage_min": 0.95,
+  "max_recall_gap": 0.01,
+  "max_return_relative_error": 5e-06,
+  "weights": [
+    0.1,
+    0.3,
+    0.5,
+    0.7,
+    0.9
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "status": "PASS",
+  "output": "PASS: LE and strict ties differ; positive-margin missing zero branch remains an upstream issue\n",
+  "scope": "explicit LE vs strict policy fixtures, not a strict full index validation"
+}

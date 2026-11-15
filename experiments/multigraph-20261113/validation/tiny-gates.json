@@ -1,0 +1,209 @@
+{
+  "status": "PASS",
+  "cases": [
+    {
+      "alpha": 0.0,
+      "method": "M_equal",
+      "byte_equal": true
+    },
+    {
+      "alpha": 0.0,
+      "method": "M_weighted",
+      "byte_equal": true
+    },
+    {
+      "alpha": 0.0,
+      "method": "M_endpoint",
+      "byte_equal": true
+    },
+    {
+      "alpha": 0.0,
+      "method": "Or_nearest",
+      "byte_equal": true
+    },
+    {
+      "alpha": 0.0,
+      "method": "F",
+      "byte_equal": true
+    },
+    {
+      "alpha": 0.0,
+      "method": "DEG_on",
+      "byte_equal": true
+    },
+    {
+      "alpha": 0.0,
+      "method": "DEG_off",
+      "byte_equal": true
+    },
+    {
+      "alpha": 0.1,
+      "method": "M_equal",
+      "byte_equal": true
+    },
+    {
+      "alpha": 0.1,
+      "method": "M_weighted",
+      "byte_equal": true
+    },
+    {
+      "alpha": 0.1,
+      "method": "M_endpoint",
+      "byte_equal": true
+    },
+    {
+      "alpha": 0.1,
+      "method": "Or_nearest",
+      "byte_equal": true
+    },
+    {
+      "alpha": 0.1,
+      "method": "F",
+      "byte_equal": true
+    },
+    {
+      "alpha": 0.1,
+      "method": "DEG_on",
+      "byte_equal": true
+    },
+    {
+      "alpha": 0.1,
+      "method": "DEG_off",
+      "byte_equal": true
+    },
+    {
+      "alpha": 0.1,
+      "method": "Or_ideal",
+      "byte_equal": true
+    },
+    {
+      "alpha": 0.5,
+      "method": "M_equal",
+      "byte_equal": true
+    },
+    {
+      "alpha": 0.5,
+      "method": "M_weighted",
+      "byte_equal": true
+    },
+    {
+      "alpha": 0.5,
+      "method": "M_endpoint",
+      "byte_equal": true
+    },
+    {
+      "alpha": 0.5,
+      "method": "Or_nearest",
+      "byte_equal": true
+    },
+    {
+      "alpha": 0.5,
+      "method": "F",
+      "byte_equal": true
+    },
+    {
+      "alpha": 0.5,
+      "method": "DEG_on",
+      "byte_equal": true
+    },
+    {
+      "alpha": 0.5,
+      "method": "DEG_off",
+      "byte_equal": true
+    },
+    {
+      "alpha": 0.5,
+      "method": "Or_ideal",
+      "byte_equal": true
+    },
+    {
+      "alpha": 0.9,
+      "method": "M_equal",
+      "byte_equal": true
+    },
+    {
+      "alpha": 0.9,
+      "method": "M_weighted",
+      "byte_equal": true
+    },
+    {
+      "alpha": 0.9,
+      "method": "M_endpoint",
+      "byte_equal": true
+    },
+    {
+      "alpha": 0.9,
+      "method": "Or_nearest",
+      "byte_equal": true
+    },
+    {
+      "alpha": 0.9,
+      "method": "F",
+      "byte_equal": true
+    },
+    {
+      "alpha": 0.9,
+      "method": "DEG_on",
+      "byte_equal": true
+    },
+    {
+      "alpha": 0.9,
+      "method": "DEG_off",
+      "byte_equal": true
+    },
+    {
+      "alpha": 0.9,
+      "method": "Or_ideal",
+      "byte_equal": true
+    },
+    {
+      "alpha": 1.0,
+      "method": "M_equal",
+      "byte_equal": true
+    },
+    {
+      "alpha": 1.0,
+      "method": "M_weighted",
+      "byte_equal": true
+    },
+    {
+      "alpha": 1.0,
+      "method": "M_endpoint",
+      "byte_equal": true
+    },
+    {
+      "alpha": 1.0,
+      "method": "Or_nearest",
+      "byte_equal": true
+    },
+    {
+      "alpha": 1.0,
+      "method": "F",
+      "byte_equal": true
+    },
+    {
+      "alpha": 1.0,
+      "method": "DEG_on",
+      "byte_equal": true
+    },
+    {
+      "alpha": 1.0,
+      "method": "DEG_off",
+      "byte_equal": true
+    }
+  ],
+  "centre": {
+    "status": "PASS",
+    "L": [
+      40,
+      80,
+      160
+    ],
+    "queries": 12,
+    "mode": "exact pointer navigation; same existing graph and entries",
+    "source_graph_sha256": "9c6d216e719c6704c8dc8a9e34a7bf117c5143f3765678ff62a70e63545122d3"
+  },
+  "binary_sha256": "d597a5b46ae454ff274b849141b71568ffa2e4bf495536461ef1ec9295b23aec",
+  "fixture_nodes": 256,
+  "queries": 12
+}

@@ -7,3 +7,6 @@
 /data/
 *.pyc
 __pycache__/
+*.log
+/status.json
+/runner-status.json

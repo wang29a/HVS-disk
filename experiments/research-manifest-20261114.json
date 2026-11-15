@@ -1,0 +1,437 @@
+{
+  "base_repository": "git@github.com:wang29a/HVS-disk.git",
+  "frozen_protocol_commit": "1d2aa722fe181f6581954a81ca483f00452c9371",
+  "scope": "Reviewed corrected-pruning and disk-multigraph source, protocol, run notes and small validation proofs; runtime data/state/results excluded",
+  "files": [
+    {
+      "file": "multigraph-20261113/.gitignore",
+      "bytes": 117,
+      "sha256": "b6a9494c8794c4569f0f2ff2770e0a6781a6b97008ef3dbb76f3844bea11d119"
+    },
+    {
+      "file": "multigraph-20261113/AMENDMENT-20261114.json",
+      "bytes": 486,
+      "sha256": "758810f2e285022856162a7814affa6d838ba44df5c086da7850bcf1ce816cfd"
+    },
+    {
+      "file": "multigraph-20261113/FREEZE.json",
+      "bytes": 123,
+      "sha256": "b2951d9a695ed9d6824cfca60c6fe9d503fcaf7c0640b5b58e429cc0ea64e8f8"
+    },
+    {
+      "file": "multigraph-20261113/OPENIMAGES-OFFLINE.md",
+      "bytes": 1558,
+      "sha256": "ac71809a4298d0d4289199cf8e46af98d9b351b37fc676d294cf8d888317c04c"
+    },
+    {
+      "file": "multigraph-20261113/README.md",
+      "bytes": 15594,
+      "sha256": "f7904a0c167b202e0df48b849d9ebb69b3c5498e7461030fc271be594b5f499e"
+    },
+    {
+      "file": "multigraph-20261113/RESULTS-LAION-2M.md",
+      "bytes": 4578,
+      "sha256": "0be4f8d1c63e1e2358bcc85e94862193b189bf98fd8b0d4a557c4045240997ee"
+    },
+    {
+      "file": "multigraph-20261113/RUNBOOK.md",
+      "bytes": 3255,
+      "sha256": "b9b0c3d958e4313e39944793aec5de5defd1add3f44d9a4366caeb9983a193f4"
+    },
+    {
+      "file": "multigraph-20261113/THREE-LAYER-RESULTS.md",
+      "bytes": 1985,
+      "sha256": "a31212d1cc7518babc06fa7a146d60524829bb6e06175c17beba68efeffca582"
+    },
+    {
+      "file": "multigraph-20261113/scripts/common.py",
+      "bytes": 3838,
+      "sha256": "3021f8c7bfda23a93c0970ed5cd86d3284718e98ed5198446081f0f6b63b33a3"
+    },
+    {
+      "file": "multigraph-20261113/scripts/compile.py",
+      "bytes": 2673,
+      "sha256": "a03624f2b6430b13052cbfb1121e8d9ca0b461a1bbad8c3168a014a651185485"
+    },
+    {
+      "file": "multigraph-20261113/scripts/compile_layers.py",
+      "bytes": 1286,
+      "sha256": "bde0320827e09014f07d4976b031b81d9f2f49f4681a5f1a31a3e0babe3e3639"
+    },
+    {
+      "file": "multigraph-20261113/scripts/enqueue.sh",
+      "bytes": 645,
+      "sha256": "09cc0dc63d8a12f696033d03b6dca5b340115e059db30b3592e307e9b1822cb4"
+    },
+    {
+      "file": "multigraph-20261113/scripts/enqueue_three_layers.sh",
+      "bytes": 660,
+      "sha256": "ead326965782bfd4051d8bffe03270d2695e6c10254a362969191ccf8e6c21f6"
+    },
+    {
+      "file": "multigraph-20261113/scripts/layer_analysis.py",
+      "bytes": 10480,
+      "sha256": "976033f41e46345525a5c6b7c9d26bfb28e4cc29a4aa3b380873649a58d3f325"
+    },
+    {
+      "file": "multigraph-20261113/scripts/monitor.py",
+      "bytes": 3316,
+      "sha256": "3a413a35b692bee2c99d08ce1f93994e8b65b949d7984402497fb7d8fb6f7641"
+    },
+    {
+      "file": "multigraph-20261113/scripts/multigraph.cpp",
+      "bytes": 32159,
+      "sha256": "0b2bdfac57a34aabd3bbc3d1b9426aa0fc907ff87186649b0194169abd0cc3b9"
+    },
+    {
+      "file": "multigraph-20261113/scripts/offline_openimages.py",
+      "bytes": 3768,
+      "sha256": "a5322fcd909364917bf68ca4a08c5cbdc083e2309cb5e67483f1441a64ac718a"
+    },
+    {
+      "file": "multigraph-20261113/scripts/pack.cpp",
+      "bytes": 4795,
+      "sha256": "ab85b8fda7490b16ce3ab8291f4ab1a4a92c97c4a5030ba283e2e1579f49d55f"
+    },
+    {
+      "file": "multigraph-20261113/scripts/pq_layers.cpp",
+      "bytes": 8344,
+      "sha256": "072f80e32cdedcdc108dc79fe5867b36b398e485f6617ca210dbe7781fc42bf3"
+    },
+    {
+      "file": "multigraph-20261113/scripts/prepare_inputs.py",
+      "bytes": 7553,
+      "sha256": "e31d9f7dfa3298444d45f8a6d13df8a520f2b44f1be5d1665969becfc47f25b5"
+    },
+    {
+      "file": "multigraph-20261113/scripts/protocol.py",
+      "bytes": 3099,
+      "sha256": "4b1d51f72bdf33ff1e3226452f182cfb4fd733fb4d0c5f4be4c06b8b4cfa8d9f"
+    },
+    {
+      "file": "multigraph-20261113/scripts/report.py",
+      "bytes": 10324,
+      "sha256": "1a3ddead329575fcc8994499ff77ab3d73e04b0ce0039eac709529e9ca47159d"
+    },
+    {
+      "file": "multigraph-20261113/scripts/run_queue.py",
+      "bytes": 12772,
+      "sha256": "2296a11e963a03ea407820ce2af7cb00bbab775fbf165010cc7f57d6cb478a40"
+    },
+    {
+      "file": "multigraph-20261113/scripts/run_three_layers.py",
+      "bytes": 4816,
+      "sha256": "a9ae20a6bbae1a149f31a290530f96d062fd67f71686384a4162ac05d24e0730"
+    },
+    {
+      "file": "multigraph-20261113/scripts/test_layers.py",
+      "bytes": 1646,
+      "sha256": "9f869f2260773ebb2f6b9aea578f9becf062a5291a9b3fb4786e472c1b14091e"
+    },
+    {
+      "file": "multigraph-20261113/scripts/test_protocol.py",
+      "bytes": 1594,
+      "sha256": "dbdd2541205a46f7757be5f1786156f4f16fd6de4d752ab841f01103620dbad8"
+    },
+    {
+      "file": "multigraph-20261113/scripts/validate.py",
+      "bytes": 10663,
+      "sha256": "dbcf1339583ad40a593f370f8a0e6e0604f9ad66867feaffbccb52df4c2725bb"
+    },
+    {
+      "file": "multigraph-20261113/validation/layers-build.json",
+      "bytes": 2146,
+      "sha256": "e2b18626b8e75caf6743de610b55ac943dd979bf9ad3050b596b47acb8a97bfd"
+    },
+    {
+      "file": "multigraph-20261113/validation/linux-build.json",
+      "bytes": 5837,
+      "sha256": "1eeae38693bb948f28cafd4dd95c642b94ee1f58f863018768bb0ae82db53148"
+    },
+    {
+      "file": "multigraph-20261113/validation/test_report_pipeline.py",
+      "bytes": 2376,
+      "sha256": "9cf87e508ac3f9bc60b1cc853745f2d43a5bd0103781389d9764c795fe599ef8"
+    },
+    {
+      "file": "multigraph-20261113/validation/tiny-gates.json",
+      "bytes": 3686,
+      "sha256": "22e21c77f1e48e7766e06242a34b4f57f066edaa016f938c70dd0b01ec36eedd"
+    },
+    {
+      "file": "u-shape-20261113/.gitignore",
+      "bytes": 143,
+      "sha256": "5338c0e4f8ae93a786fb7d8512f6521776cf25908ca4ae8aae4f462ca5b11a3b"
+    },
+    {
+      "file": "u-shape-20261113/AFFINITY-AMENDMENT.md",
+      "bytes": 1249,
+      "sha256": "08227394d82188a6f0cabba63265d4893124b63e130ee1f172f4b890463915ad"
+    },
+    {
+      "file": "u-shape-20261113/LITERATURE.md",
+      "bytes": 2783,
+      "sha256": "db0a0bd3549b60b66c41079b2e74d846043ff2bc9b8c26424d82e6500f08cdc9"
+    },
+    {
+      "file": "u-shape-20261113/NEXT-CHECKS-PROTOCOL.md",
+      "bytes": 5380,
+      "sha256": "04ea94eaedfb6b655c03cf72536ba4eeee607b236836ca945874523955662e85"
+    },
+    {
+      "file": "u-shape-20261113/PROTOCOL.md",
+      "bytes": 6982,
+      "sha256": "af8e15143b294ecc3cf27d8c7517161356588a4db2f33f595ad7a16395223ff5"
+    },
+    {
+      "file": "u-shape-20261113/PRUNING-V2-PROTOCOL.md",
+      "bytes": 7419,
+      "sha256": "3aa135caa57c7792fa5f0327b47a391d8e06f607a7f8cc0e49f1c528b41a8d5b"
+    },
+    {
+      "file": "u-shape-20261113/PRUNING-V2-RESULTS.md",
+      "bytes": 3691,
+      "sha256": "6f452dd76f7c27bcee31efa5a334139e0b98794e1e4510e0f61f22157666a03c"
+    },
+    {
+      "file": "u-shape-20261113/README.md",
+      "bytes": 4573,
+      "sha256": "37b1bdd5c816c32727a39f202a95eb483acaef37b4ce43ddaed90e9b5555f82a"
+    },
+    {
+      "file": "u-shape-20261113/SEMANTICS-PROVENANCE.md",
+      "bytes": 4634,
+      "sha256": "f4671cc11468f782df0ad60df2d87740dbbd765d1d4f2bfbbe7dab74c6c84cb6"
+    },
+    {
+      "file": "u-shape-20261113/STAGE2.md",
+      "bytes": 8096,
+      "sha256": "e8ed84b2bf04a4cb7da386fca00f38d2e7806bc2d726cac0be44ef00da2c75bd"
+    },
+    {
+      "file": "u-shape-20261113/STATUS-2026-11-13.md",
+      "bytes": 2530,
+      "sha256": "bd6409f5907e0ca24f741a1c5bb2ee3e107edf3454af15efe137f7d32d9e26e2"
+    },
+    {
+      "file": "u-shape-20261113/scripts/audit_previous_unified.py",
+      "bytes": 1998,
+      "sha256": "9458e0200bb18be2a9e29e364a0cfbc082e7a9603a50216dbd0e736520fabdfd"
+    },
+    {
+      "file": "u-shape-20261113/scripts/audit_unified.cpp",
+      "bytes": 12007,
+      "sha256": "d4a0bb7b69f0e5c59a654ea22df241b6f9e3ab862cb39c056557792abe28e80a"
+    },
+    {
+      "file": "u-shape-20261113/scripts/build_tools.py",
+      "bytes": 1498,
+      "sha256": "c9bbe610d92f18d526e502e2fc079ba42de68e10da47f2d12abdc8b4399de579"
+    },
+    {
+      "file": "u-shape-20261113/scripts/build_unified.py",
+      "bytes": 4015,
+      "sha256": "503180236158c3c920ac77200b443cf970ca913a5f601aa2d06b9d09e195f4a7"
+    },
+    {
+      "file": "u-shape-20261113/scripts/check_builders_v2.py",
+      "bytes": 4338,
+      "sha256": "37f6006a03d2311435e3d6f9dcb7270dfa4b1c2e50592e7c68de8d36a938d857"
+    },
+    {
+      "file": "u-shape-20261113/scripts/check_pointer.py",
+      "bytes": 3865,
+      "sha256": "5077d3c823a129a806019aa296b37180f1e3daa0d5716244a7c792e505043b98"
+    },
+    {
+      "file": "u-shape-20261113/scripts/check_specialized.py",
+      "bytes": 2868,
+      "sha256": "1fd5637d453c6ef82f42782a581d65119f0d252e86838b2a8f734b94eb783382"
+    },
+    {
+      "file": "u-shape-20261113/scripts/compare_float_graphs.cpp",
+      "bytes": 7614,
+      "sha256": "7a5e828997f24cd7eb718c51f3518a32b32eed4db33d83a1e17b699c4c8891b9"
+    },
+    {
+      "file": "u-shape-20261113/scripts/diagnose_centre_pruning.cpp",
+      "bytes": 10270,
+      "sha256": "c27a36e29c926060d0d057f261112f6c0cf716d2d362014e88cfd655539bab10"
+    },
+    {
+      "file": "u-shape-20261113/scripts/finish_pointer_followups.py",
+      "bytes": 2717,
+      "sha256": "2287e77509c8f516a3902849015d93fc93a66d34970ba2eef0ad9d55034bb80e"
+    },
+    {
+      "file": "u-shape-20261113/scripts/fixed_pruning.h",
+      "bytes": 1221,
+      "sha256": "c0d66fbbe650d4d4f95299b981c96b8049e4c18924ae40bab01433aebde4e3c5"
+    },
+    {
+      "file": "u-shape-20261113/scripts/hvs_interval_stats.h",
+      "bytes": 3440,
+      "sha256": "58d1f476fc9b371e40ff86435c35f7016546433e0320b48d7767735772b0bf04"
+    },
+    {
+      "file": "u-shape-20261113/scripts/pointer_search.cpp",
+      "bytes": 16990,
+      "sha256": "93aab351b4fe97c232477033b0ca46cee0a18861362e2535e91593263c0e7795"
+    },
+    {
+      "file": "u-shape-20261113/scripts/prepare_data.py",
+      "bytes": 17826,
+      "sha256": "eb02340fed31a48d1ebab9bddd1edb49e176839ae282c3db3cc3c80186e4b0f6"
+    },
+    {
+      "file": "u-shape-20261113/scripts/prepare_pruning_v2.py",
+      "bytes": 8976,
+      "sha256": "2d551f82c135d12c08f23c7445c7a9f3f2c99a3e23d77d99e5560b9095673ee5"
+    },
+    {
+      "file": "u-shape-20261113/scripts/prepare_specialized.py",
+      "bytes": 4045,
+      "sha256": "f546e4600720594ceb58faa64554f5ff05aed7412d76d3d12ee17d6971beab97"
+    },
+    {
+      "file": "u-shape-20261113/scripts/pruning_semantics.h",
+      "bytes": 2137,
+      "sha256": "dd504c3649962fe0830a6568d8424b6164be186af4905e81864926d81f81b869"
+    },
+    {
+      "file": "u-shape-20261113/scripts/review_monitor.py",
+      "bytes": 4961,
+      "sha256": "28b9dfa327dfef403c5a76d85ef65d6872e65d175fad124db04725f2c239e97e"
+    },
+    {
+      "file": "u-shape-20261113/scripts/run.sh",
+      "bytes": 1348,
+      "sha256": "930d2cda7cddea0ee94a52046267ed8f2f8e115a07875ac981d30da9591bf9f2"
+    },
+    {
+      "file": "u-shape-20261113/scripts/run_centre_explanation.py",
+      "bytes": 1371,
+      "sha256": "1bbfd2746ce55925f058fc836b853e02ecabd3ebd0c5fda23120f749dbd8d393"
+    },
+    {
+      "file": "u-shape-20261113/scripts/run_priority_review.py",
+      "bytes": 7417,
+      "sha256": "23061c572ae1be269aeb0be475235478949c3c92a4a6ae17117c6282d9dc2fed"
+    },
+    {
+      "file": "u-shape-20261113/scripts/run_pruning_v2.py",
+      "bytes": 7449,
+      "sha256": "57787d50789ccfd121214970824c35100b872145c2b67e056f9ec1e8e0f27091"
+    },
+    {
+      "file": "u-shape-20261113/scripts/run_review_recheck.py",
+      "bytes": 3412,
+      "sha256": "7eadacb90985eae269583eb487b66766d9c3a55aac621946a873fb82c49d310f"
+    },
+    {
+      "file": "u-shape-20261113/scripts/run_stage2.sh",
+      "bytes": 502,
+      "sha256": "dfdb3a7db6d7ad1b0cde5045eb51018a838a620093674e281729d1b8aa93e14f"
+    },
+    {
+      "file": "u-shape-20261113/scripts/run_unified_audit.py",
+      "bytes": 3128,
+      "sha256": "cc8bf157d75db6d964a939b9d2cb24ff16ed9662c0b994369999e311561ee3eb"
+    },
+    {
+      "file": "u-shape-20261113/scripts/ssd_priority_review.py",
+      "bytes": 11317,
+      "sha256": "dae3b6e927bf4093300c647fa8fd6246fbc5aff27ab16aa8597c4e176dba53cd"
+    },
+    {
+      "file": "u-shape-20261113/scripts/stage2_queue.py",
+      "bytes": 18270,
+      "sha256": "968f3ee891c43511bcf4df869dd0bb55567c7da5cda7eb2df6473f60cecd0bc2"
+    },
+    {
+      "file": "u-shape-20261113/scripts/test_actual_pruner.cpp",
+      "bytes": 4694,
+      "sha256": "e7d189286c1e4e7adba2e2f8e1d2f05d1881c1fd1ea04e2e8fc3c4fb0cad593c"
+    },
+    {
+      "file": "u-shape-20261113/scripts/test_prepare_data.py",
+      "bytes": 5560,
+      "sha256": "d09915253b8e346ba73e471ce2ed05ae8d5abb0ac215439eaa36e1b57df065a2"
+    },
+    {
+      "file": "u-shape-20261113/scripts/test_pruning_semantics.cpp",
+      "bytes": 4591,
+      "sha256": "dba7527111c10715fac800c3be6161738df3bf5e23e951ac9044da085e860525"
+    },
+    {
+      "file": "u-shape-20261113/scripts/test_review.py",
+      "bytes": 1948,
+      "sha256": "6544c5b35330ecb21c5058376c0894d82965750943ece91ace805b1b37e8d5b9"
+    },
+    {
+      "file": "u-shape-20261113/scripts/test_stage2.py",
+      "bytes": 2396,
+      "sha256": "478b7f390824bbf5fc5ffc59f3e3237f9967ce4a83ceacab3b1a7d198d086305"
+    },
+    {
+      "file": "u-shape-20261113/scripts/test_tie_conventions.cpp",
+      "bytes": 1826,
+      "sha256": "6bc10ac43eb66114c25a3ff42bcd8f4a2c52dafd15efaae0c95575a21ce4a4c1"
+    },
+    {
+      "file": "u-shape-20261113/validation/pointer-parity.json",
+      "bytes": 820,
+      "sha256": "56f37df9e2fc4a1643f8199df45612afcc00353497b7f54d1347867617d0a76c"
+    },
+    {
+      "file": "u-shape-20261113/validation/specialized-validation.json",
+      "bytes": 610,
+      "sha256": "cd119081528e2b9405b73859392dbe6d49b8ead8a161673a7866dae825f081a3"
+    },
+    {
+      "file": "u-shape-20261113/validation-review/comparison-proof.json",
+      "bytes": 95,
+      "sha256": "ea78999bc7297c79a9614f737fe308fcbd8a50a2f7826cd2abbefa6c56a43a37"
+    },
+    {
+      "file": "u-shape-20261113/validation-review/diagnose-build.json",
+      "bytes": 1809,
+      "sha256": "0c9c110a885f896530d88c3d339dd9bd4a1efce92838625ba95bc89148940608"
+    },
+    {
+      "file": "u-shape-20261113/validation-review/tie-proof.json",
+      "bytes": 222,
+      "sha256": "661d839cca8b87b53ba0f5c0f30766102aa0d909b97b7b00ddf87218346e3ea6"
+    },
+    {
+      "file": "u-shape-20261113/validation-v2/audit-2m-summary.json",
+      "bytes": 848,
+      "sha256": "ea6eb8adea90cc148300d540953b51b316c663901324bb324cefa9a2b681efdb"
+    },
+    {
+      "file": "u-shape-20261113/validation-v2/audit-fixture-proof.json",
+      "bytes": 254,
+      "sha256": "0bd5f6df85465531129448fb22d39ea5bd30f7a34211a6ad6a4485f48d6ecbee"
+    },
+    {
+      "file": "u-shape-20261113/validation-v2/audit-prior-summary.json",
+      "bytes": 1819,
+      "sha256": "559971c4830dd9b32a33f9a9d82bc258ee175031c3438326b328be9ba32177a3"
+    },
+    {
+      "file": "u-shape-20261113/validation-v2/integration-proof.json",
+      "bytes": 5637,
+      "sha256": "c3ff3e1e5ad5772024c2912615d728b3dd2821ac4a55a62b6defb3ffcb7452b8"
+    },
+    {
+      "file": "u-shape-20261113/validation-v2/semantic-proof.json",
+      "bytes": 15823,
+      "sha256": "5486b4d753479892bb8a912ffe5a1a3d7043b2be81a75e91bfec89262824eb50"
+    },
+    {
+      "file": "VALIDITY-2026-11-13.md",
+      "bytes": 3450,
+      "sha256": "f8aaf5cef823603e8214be98fc668ca574bfe1ae476294076aca7d26118018d5"
+    }
+  ]
+}

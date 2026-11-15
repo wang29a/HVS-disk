@@ -1,0 +1,14 @@
+analysis/
+logs/
+__pycache__/
+*.partial
+*.pyc
+*.log
+/status.json
+/runner-status.json
+/bin/
+/scratch/
+/data/
+stage2/
+stage2-v2/
+review-20261113/

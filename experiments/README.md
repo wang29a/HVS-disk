@@ -1,13 +1,17 @@
 # 预实验入口
 
-这里保存截至 2026-11-12 的预实验代码与运行记录，主要回答 alpha 过滤、页面密度、缓存和单双空间布局的性能问题。目录名与 node3 工作目录一致，脚本之间有依赖，应保留兄弟目录结构。
+2026-11-13 有效性更新：统一图也存在零斜率／零右端项剪枝分支遗漏，旧六格、权重扫描等机制结论需要修正图复核。请先读 [有效性通知](VALIDITY-2026-11-13.md) 和 [U 形 v2 协议](u-shape-20261113/PRUNING-V2-PROTOCOL.md)，再使用下列历史结果。
+
+这里保存截至 2026-11-14 的预实验代码与运行记录，主要回答 alpha 过滤、页面密度、缓存、单双空间布局和统一图／多图架构的性能问题。目录名与 node3 工作目录一致，脚本之间有依赖，应保留兄弟目录结构。
 
 第一次运行普通 Full/Merge/No-alpha，请先看[项目首页](../README.md)和[构建与搜索流程](../docs/workflow.md)。本目录是研究用的隔离实现，依赖已有数据、PQ、GT 和构建清单，不能只 clone 仓库就启动完整实验。
 
-## 近期实验看这四处
+## 近期实验入口
 
 | 想了解什么 | 实现与协议 | 已归档的结果 |
 |---|---|---|
+| 修正剪枝边界，核验统一图／专用图差别 | [U 形与构图复核](u-shape-20261113/README.md) | [v2 结果](u-shape-20261113/PRUNING-V2-RESULTS.md)、[来源核对](u-shape-20261113/SEMANTICS-PROVENANCE.md) |
+| 单空间双索引／权重专用图是否能替代统一图 | [冻结协议](multigraph-20261113/README.md)、[执行手册](multigraph-20261113/RUNBOOK.md) | [三层损失诊断](multigraph-20261113/THREE-LAYER-RESULTS.md)、[Laion 2M 磁盘结果](multigraph-20261113/RESULTS-LAION-2M.md) |
 | 过滤在精确 DRAM、PQ DRAM、PQ SSD 下分别有什么作用 | [OpenImages 六格与三臂](metric-consistent-20261111/README.md) | [六格结果](metric-consistent-20261111/STAGE-RESULTS-2026-11-11.md) |
 | 同样的过滤结论在 Laion 上是否成立 | [Laion 六格](laion-six-cell-20261111/README.md) | [结果](laion-six-cell-20261111/RESULTS.md) |
 | 不同 alpha 的表现为何不同 | [机制分析与局部加密](alpha-mechanism-20261112/README.md) | [权重扫描](alpha-mechanism-20261112/WEIGHT-SCAN-RESULTS.md)、[分析补充](alpha-mechanism-20261112/COMPLETED-RESULTS-SUPPLEMENT.md) |
@@ -28,6 +32,8 @@ Node3 的工作根目录是 `/mnt/nvme3/wz/hvs-disk-build-20261027/experiments`�
 
 长任务在 tmux 内串行运行，共用队列锁；近期搜索固定四线程、NUMA 3，构图有单独的线程上限。恢复前确认主机使用约束、磁盘与内存资源、输入哈希和已冻结的配置。历史 Markdown 中的“正在运行”只是当时记录，实时进度看 node3 的 `status.json`、`progress.json`、验收点和 pending 清单。
 
+当前多图实验已完成Laion 2M的1,572个三轮计时测点，pending为0，未自动启动OpenImages。`multigraph-20261113/scripts/enqueue_three_layers.sh` 是已批准协议修订后的恢复入口；它先验证B/C遍历损失，再复用原图、GT和已完成点。原 `enqueue.sh` 保留作首轮追溯，旧计划不覆盖，新计划单独保存。U形首轮专用图已判为无效历史对照；不要从旧脚本重启那批结果，也不要把修复代码直接覆盖到生产源文件。
+
 首次部署、编译清单依赖、具体数据/PQ 路径、tmux 命令和本地结果同步方式见[执行手册](RUNBOOK.md)。旧驱动不一定适合新的资源限制，不要直接重启全部历史队列。
 
 ## 只检查代码，不跑实验
@@ -40,7 +46,7 @@ python3 experiments/check_sources.py
 python3 experiments/check_sources.py --unit
 ```
 
-检查器核对归档 SHA256、Python/shell 语法，以及可选的 NUMA、队列和 Laion 协议回归，不会启动搜索队列或 SSH 计算。Linux 编译和功能检查记录见 [VALIDATION.md](VALIDATION.md)；这些检查不等于在新环境重跑了性能实验。
+检查器保留历史218份归档身份，同时核对新增研究代码清单、Python/shell语法，并可运行NUMA、队列、子集GT、U形及多图协议回归。它会跳过运行时目录，不会启动搜索队列或SSH计算。Linux编译和功能检查记录见 [VALIDATION.md](VALIDATION.md)；这些检查不等于在新环境重跑了性能实验。
 
 ## 早期对照在哪里
 
@@ -55,4 +61,4 @@ python3 experiments/check_sources.py --unit
 
 早期结果保留其原图、距离公式和工作负载限制，不与修复后实验拼成一条因果结论。完整历史目录索引放在[执行手册](RUNBOOK.md)。
 
-本仓库不存数据集、索引、GT、二进制、逐查询结果或大体积向量快照。报告中的原始 JSON、图和日志需要从 node3 或本地结果归档读取；`source-manifest.json` 只追踪代码来源与内容身份。`relocate_checkpoints.py` 是一次性空间恢复工具，不属于日常执行流程。
+本仓库不存数据集、索引、GT、二进制、逐查询结果或大体积向量快照。报告中的原始JSON、图和日志需要从node3或本地结果归档读取；`source-manifest.json`保留历史归档身份，`research-manifest-20261114.json`记录本轮新增源码和协议身份，不能把它们当作运行结果清单。`relocate_checkpoints.py`是一次性空间恢复工具，不属于日常执行流程。

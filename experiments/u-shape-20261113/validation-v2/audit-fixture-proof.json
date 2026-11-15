@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "cases": [
+    {
+      "case": "zero-slope",
+      "susceptible_edges": 1
+    },
+    {
+      "case": "nonzero-control",
+      "susceptible_edges": 0
+    },
+    {
+      "case": "duplicates",
+      "susceptible_edges": 2
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "status": "PASS",
+  "performance_evidence": false,
+  "cases": [
+    {
+      "case": "full-on",
+      "L": [
+        40,
+        120
+      ],
+      "queries": 8,
+      "ids_distances_and_expansion_batches_byte_equal": true
+    },
+    {
+      "case": "full-off",
+      "L": [
+        40,
+        120
+      ],
+      "queries": 8,
+      "ids_distances_and_expansion_batches_byte_equal": true
+    },
+    {
+      "case": "compact",
+      "L": [
+        40,
+        120
+      ],
+      "queries": 8,
+      "ids_distances_and_expansion_batches_byte_equal": true
+    },
+    {
+      "case": "single",
+      "L": [
+        40,
+        120
+      ],
+      "queries": 8,
+      "ids_distances_and_expansion_batches_byte_equal": true
+    }
+  ],
+  "binary_sha256": "0f2fa8e24ff54644bcef8bc3d25f0b66e0d9a9869b9bba10145fcb7decafdd01"
+}

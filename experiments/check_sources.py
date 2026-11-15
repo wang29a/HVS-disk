@@ -10,37 +10,54 @@ import sys
 import os
 
 ROOT = Path(__file__).resolve().parent
+SKIP_DIRECTORIES = {'__pycache__', 'variant', 'bin', 'build', 'scratch',
+                    'snapshots', 'workloads', 'weight-scan', 'runtime',
+                    'stage2', 'stage2-v2', 'review-20261113'}
+
+
+def source_files():
+    # Prune runtime trees before descent: node3 can contain full Python wheels,
+    # graph checkpoints and thousands of timing points beside these sources.
+    for directory, names, files in os.walk(str(ROOT), followlinks=False):
+        names[:] = sorted(name for name in names if name not in SKIP_DIRECTORIES)
+        for name in sorted(files):
+            yield Path(directory) / name
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--unit', action='store_true', help='also run existing small NumPy/protocol tests')
     args = parser.parse_args()
-    manifest = json.loads((ROOT / 'source-manifest.json').read_text())
-    for record in manifest['files']:
-        relative = Path(record['file'])
-        if relative.is_absolute() or '..' in relative.parts:
-            raise RuntimeError('unsafe manifest path: ' + str(relative))
-        data = (ROOT / relative).read_bytes()
-        if len(data) != record['bytes'] or hashlib.sha256(data).hexdigest() != record['sha256']:
-            raise RuntimeError('archived source changed: ' + str(relative))
+    manifests = ['source-manifest.json', 'research-manifest-20261114.json']
+    identities = {}
+    for name in manifests:
+        manifest = json.loads((ROOT / name).read_text())
+        for record in manifest['files']:
+            relative = Path(record['file'])
+            if relative.is_absolute() or '..' in relative.parts:
+                raise RuntimeError('unsafe manifest path: ' + str(relative))
+            data = (ROOT / relative).read_bytes()
+            if len(data) != record['bytes'] or hashlib.sha256(data).hexdigest() != record['sha256']:
+                raise RuntimeError('source identity changed: ' + str(relative))
+        identities[name] = len(manifest['files'])
     python_count = shell_count = 0
-    for path in sorted(ROOT.rglob('*')):
-        if not path.is_file() or any(p in path.parts for p in ('__pycache__', 'variant', 'bin', 'scratch', 'snapshots', 'workloads', 'weight-scan')):
-            continue
+    for path in source_files():
         if path.suffix == '.py':
             ast.parse(path.read_text(encoding='utf-8'), filename=str(path))
             python_count += 1
         elif path.suffix == '.sh':
             subprocess.run(['bash', '-n', str(path)], check=True)
             shell_count += 1
-    print('PASS: {} archived identities; {} Python and {} shell syntax checks'.format(
-        len(manifest['files']), python_count, shell_count), flush=True)
+    print('PASS: {} archived and {} research identities; {} Python and {} shell syntax checks'.format(
+        identities['source-manifest.json'], identities['research-manifest-20261114.json'],
+        python_count, shell_count), flush=True)
     if args.unit:
         env = dict(os.environ, PYTHONDONTWRITEBYTECODE='1', OPENBLAS_NUM_THREADS='1', MKL_NUM_THREADS='1')
         for directory, names in [
             ('metric-consistent-20261111', ['test_numa_guard', 'test_queue_guard']),
             ('laion-six-cell-20261111', ['test_protocol']),
+            ('u-shape-20261113', ['test_prepare_data', 'test_stage2', 'test_review']),
+            ('multigraph-20261113', ['test_protocol', 'test_layers']),
         ]:
             subprocess.run([sys.executable, '-B', '-m', 'unittest'] + names,
                            cwd=str(ROOT / directory / 'scripts'), env=env, check=True)

@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "builder_sha256": "da958abf695bc3d6dd2536942d02b94f0ac2221b02a0558e4663719b3ce9d251",
+  "distance_sites": 14,
+  "fixtures": [
+    {
+      "alpha": 0.1,
+      "edges": 10240,
+      "full_intervals": 10240,
+      "graph_sha256": "b377d37dc4019aed258712a8c70faabed7cebad3d495c8e766dc1da412cc157e"
+    },
+    {
+      "alpha": 0.9,
+      "edges": 10240,
+      "full_intervals": 10240,
+      "graph_sha256": "3d9a7a94115a50ac3010a3a27f633597e451ebddc0006a3db5e145ac14f978b3"
+    }
+  ],
+  "scope": "integration/format/fixed-objective degeneration; not graph quality or performance evidence"
+}
