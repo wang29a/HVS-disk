@@ -1,0 +1,5 @@
+{
+  "bytes": 7336,
+  "sha256": "e3303661b388fad29eb2e482ea90c86a7bcf7a6ff7025cc1f012da9935786651",
+  "policy": "append-only README; stop on failed step0; no SSD timing"
+}
