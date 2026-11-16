@@ -1,0 +1,29 @@
+{
+  "commit": "728c4128e74039ce212c8c22a42a5185abd68c23",
+  "repository": "https://github.com/Heisenberg-Yin/DEG",
+  "files": {
+    "src/CMakeLists.txt": "882dbac68a7178e7adfc5a09bbc9ea3ca3d066b3d12dbbb620792016baf6bcf6",
+    "src/rtree.cpp": "951d3eebaccfd2b8f0c748f90e5f6c9f29f793e6e41b19b5e54bbb5e4d6be509",
+    "src/component_search_entry.cpp": "463951318d16cc16f6ebaea63d12f1a7e70452c03807b40e19d812ea9a36e9a1",
+    "src/component_conn.cpp": "3a3e150c58f9d0e6d07c2ed6548c9f7ffa3d97e73608c10b45a9ca0f6505c56c",
+    "src/component_candidate.cpp": "42a6c90ba3749a86306be0f6e8efd21aa9274a105f2f03787e81938482ea6fdf",
+    "src/nndescent.cpp": "d032dc8aeb31eef51433f93e69f2720adc830eef974803dcf8f48272a7421d6f",
+    "src/builder.cpp": "304d07654ba2ba620b901a6ab9861b1517fff7a0003a9536001d0bca384432de",
+    "src/component_prune.cpp": "a9ac97acc5ceb202682cf1749db863e9a2b39603986c99b0c9df72628a1274fd",
+    "src/component_refine.cpp": "42a6c90ba3749a86306be0f6e8efd21aa9274a105f2f03787e81938482ea6fdf",
+    "src/component_init.cpp": "fff15e40e68465c34edd7e5366fc55b4e3f84eb4fc9276172dede8e0f09f8209",
+    "src/component_load.cpp": "4407f6f6d4ef8717a0e840bb3d9d3916689dc856243c8030297fb17f328d1f8e",
+    "src/component_route.cpp": "fc9c220169fb0588253361e3e4a9b84a37532bcc165efb3bfcf17e7f2feee261",
+    "src/component_entry.cpp": "6ca03accae904fd852c1ac1ed4cf3d752b8c7d1d2eb21cbf0146ee5232e91333",
+    "include/index.h": "0f7c8baeb41609fb2ab97c54e17d2ba2fb19e782f7910e069f5f8e75a0893bfb",
+    "include/rtree.h": "eef8b782263296840b4c196b8edbcbfc90c612db8bc4e5e7b84cd1453d1413f0",
+    "include/policy.h": "a5327be61459ef432f4daed4b499ab487d7e1ad560e3d21d469e69c1164a41d5",
+    "include/distance.h": "fb3e677a5031e0ce12aa9be3e38785bf0686cbf621e345cbd11a453148129897",
+    "include/parameters.h": "be152d745a18bbf098f614d356ac76a6605f392075b42d19125f111cf475aa61",
+    "include/util.h": "9b6202173c51201425acfb0bb265c3c1e839e7caf474a6e570294c7037556a23",
+    "include/builder.h": "c7f2bedca70f46375fb58ecc5c7167242514e504c729f247cc49d6902fc9c9dc",
+    "include/component.h": "7df9566d600414913f3df1610ce26630bd0dbbb2d83f056a367049dd635263d0",
+    "include/set_para.h": "3949a714596d839e0839031541f131ed8a4362d9a7dd090862ae45fd634724fe",
+    "include/CommonDataStructure.h": "e832b9ebe4b8a1c33ccb2befa622c2c3e03e1226482119909363c887e230d31f"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "base_fixed_source_sha256": "a7e3e599b7cc62f47822df1e7bfdb22821bdf98dd14de33d9c0ac955eb5464b2",
+  "header_sha256": "fa3f30f954b5a3cecc92487432cef94ac284c3162a52ee0c528302fd41ace095",
+  "builder_sha256": "d657a3efa5c86a4367e3a62881dcabc2c762ceb22acb77014d26cbb6be6374b8",
+  "library_sha256": "4806aafe25d4f7048a37a906bf193b6e2ccec62c576e5cd7d1c0cba4e28ae59a",
+  "original_fixed_builder_sha256": "88ca196d668bb793956d674bc665e69dead5b590ac3fd6869994cb681486ef61",
+  "geometry_cases": 4000,
+  "rho1_actual_member_test": true,
+  "rho_grid": [
+    1,
+    1.025,
+    1.05,
+    1.1,
+    1.2,
+    1.4,
+    1.8,
+    2
+  ],
+  "metric": "fixed .5 weighted Euclidean; LE; rho multiplies fused distance"
+}

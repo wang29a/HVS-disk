@@ -190,3 +190,10 @@ Read `experiments/README.md` before using the research drivers. Directory names 
 The current research chain is `metric-consistent-20261111`, `laion-six-cell-20261111`, `alpha-mechanism-20261112`, then `topology-resident-three-arm-20261112`. Use tmux and the shared queue lock for timed work; the current search protocol uses four threads on NUMA 3, while graph construction has a separate capped allocation. Confirm host availability and input/build identities before resuming. Historical drivers retain their original resource settings and are not current defaults.
 
 The corrected weighted-Euclidean objective and conservative interval writer are isolated research implementations. Do not overwrite production sources with `sources/` snapshots or mix old indexes with the new library. Do not commit runtime analysis, state, datasets, GT, indexes, binaries, libraries, or vector snapshots. `relocate_checkpoints.py` is a manual recovery tool, not a normal experiment step.
+
+
+## November 16 research archive
+
+Read `experiments/VALIDITY-2026-11-16.md`, the latest RESULTS pages, and `experiments/RUNBOOK-20261116.md` before using `paper-priorities-20261114`, `edbt-evidence-20261115`, or `backlink-ab-20261115`. These queues have completed; the earlier `backlink-range-audit-20261115` is superseded and must not be resumed. The corrected B function and small-graph gates passed, and Laion2M A/B results retain a filtering disadvantage at the two tested SSD weights. Scope these claims to the recorded objective, memory/layout, recall and thread conditions.
+
+No production C++ defaults were changed by this archive. Keep generated variants, runtime analysis/state, query traces, GT, datasets, libraries and indexes out of Git. New source identities are in `experiments/research-manifest-20261116.json`; append-only protocols are verified by prefix hashes. The portable `--unit` checks do not launch experiments; EDBT source-hook tests require the existing Linux experiment resources.

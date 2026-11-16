@@ -15,3 +15,7 @@ Accept only actual NUMA-observed windows with the existing CPU/disk-write guards
 Interpretation is conditional: topology residency removing the high-thread loss suggests topology I/O contributes; a loss persisting with zero topology reads points to coordinate I/O or execution overhead. Compare coordinate wait, process CPU and residual before attributing a mechanism. This experiment does not establish a fully equal-cache-budget production configuration or invalidate the four-thread results.
 
 Queue: finish this diagnostic first, then the independent backlink function gate and corrected-author small-graph control; only then may the two-million-node A/B stage start if all gates pass. No automatic SSD A/B timing or full-dataset rebuild is enabled here.
+
+## Append: residency gate field correction, before timing
+
+The first gate rejected identical binary traces because the OpenImages per-query JSON field named topology_pages counts backend submissions, unlike its aggregate graph topology_pages field. That field must change to zero with residency. Compare all other per-query fields, require all four trace files byte-equal, and retain the existing aggregate logical-page/work invariants plus zero topology submissions. Preserve the failed gate and plan as attempt1; no timing point was accepted, no parameters or executable changed.
