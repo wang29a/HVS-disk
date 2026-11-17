@@ -1,0 +1,90 @@
+{
+  "results": [
+    {
+      "sanitizer": "asan",
+      "duration_seconds": 600,
+      "result": {
+        "requested_seconds": 600,
+        "elapsed_seconds": 600.032,
+        "update_operations": 1000,
+        "query_threads": 4,
+        "update_threads": 2,
+        "weights": [
+          {
+            "alpha": 0.1,
+            "L": 64,
+            "queries": 23464,
+            "recall_lower_bound": 0.964512,
+            "min_500_query_window_lower_bound": 0.9616,
+            "windows": 22965,
+            "page_lock_wait_ns": 883430371
+          },
+          {
+            "alpha": 0.5,
+            "L": 64,
+            "queries": 23464,
+            "recall_lower_bound": 0.983519,
+            "min_500_query_window_lower_bound": 0.982,
+            "windows": 22965,
+            "page_lock_wait_ns": 844594136
+          },
+          {
+            "alpha": 0.9,
+            "L": 64,
+            "queries": 23463,
+            "recall_lower_bound": 0.977496,
+            "min_500_query_window_lower_bound": 0.9758,
+            "windows": 22964,
+            "page_lock_wait_ns": 822271191
+          }
+        ],
+        "passed": true
+      },
+      "binary_sha256": "61cc92514fe513d32ab534abc39255260b7ec0d24674f021fdac04a9e4aef0ea"
+    },
+    {
+      "sanitizer": "tsan",
+      "duration_seconds": 600,
+      "result": {
+        "requested_seconds": 600,
+        "elapsed_seconds": 600.214,
+        "update_operations": 1000,
+        "query_threads": 4,
+        "update_threads": 2,
+        "weights": [
+          {
+            "alpha": 0.1,
+            "L": 64,
+            "queries": 2327,
+            "recall_lower_bound": 0.964246,
+            "min_500_query_window_lower_bound": 0.961,
+            "windows": 1828,
+            "page_lock_wait_ns": 4521013721
+          },
+          {
+            "alpha": 0.5,
+            "L": 64,
+            "queries": 2326,
+            "recall_lower_bound": 0.983319,
+            "min_500_query_window_lower_bound": 0.9826,
+            "windows": 1827,
+            "page_lock_wait_ns": 4068377176
+          },
+          {
+            "alpha": 0.9,
+            "L": 64,
+            "queries": 2326,
+            "recall_lower_bound": 0.977085,
+            "min_500_query_window_lower_bound": 0.976,
+            "windows": 1827,
+            "page_lock_wait_ns": 4447812973
+          }
+        ],
+        "passed": true
+      },
+      "binary_sha256": "031f1a1a649453e6d4f0c6330ebb523241fb9e0de1329263f19f1e216a2035e6"
+    }
+  ],
+  "scope": "incoming-degree regression: two complete 600-second sanitizer workloads; original prior-version gates retained separately",
+  "coverage": "new executor, prune, harness and upstream Linux reader instrumented; other prebuilt upstream/external libraries uninstrumented"
+}

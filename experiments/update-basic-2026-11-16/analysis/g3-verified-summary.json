@@ -1,0 +1,96 @@
+{
+  "asan": {
+    "result": {
+      "requested_seconds": 600,
+      "elapsed_seconds": 600.04,
+      "update_operations": 1000,
+      "query_threads": 4,
+      "update_threads": 2,
+      "weights": [
+        {
+          "alpha": 0.1,
+          "L": 64,
+          "queries": 19140,
+          "recall_lower_bound": 0.964065,
+          "min_500_query_window_lower_bound": 0.9616,
+          "windows": 18641,
+          "page_lock_wait_ns": 1367016522
+        },
+        {
+          "alpha": 0.5,
+          "L": 64,
+          "queries": 19139,
+          "recall_lower_bound": 0.983406,
+          "min_500_query_window_lower_bound": 0.9822,
+          "windows": 18640,
+          "page_lock_wait_ns": 1431127902
+        },
+        {
+          "alpha": 0.9,
+          "L": 64,
+          "queries": 19139,
+          "recall_lower_bound": 0.977219,
+          "min_500_query_window_lower_bound": 0.976,
+          "windows": 18640,
+          "page_lock_wait_ns": 1374591685
+        }
+      ],
+      "passed": true
+    },
+    "query_count": 57418,
+    "operation_kinds": {
+      "i": 591,
+      "d": 309,
+      "m": 100
+    },
+    "mean_query_page_lock_wait_us": 72.67296159740847,
+    "raw_counts_verified": true
+  },
+  "tsan": {
+    "result": {
+      "requested_seconds": 600,
+      "elapsed_seconds": 600.266,
+      "update_operations": 1000,
+      "query_threads": 4,
+      "update_threads": 2,
+      "weights": [
+        {
+          "alpha": 0.1,
+          "L": 64,
+          "queries": 2321,
+          "recall_lower_bound": 0.963938,
+          "min_500_query_window_lower_bound": 0.961,
+          "windows": 1822,
+          "page_lock_wait_ns": 4971040583
+        },
+        {
+          "alpha": 0.5,
+          "L": 64,
+          "queries": 2321,
+          "recall_lower_bound": 0.98324,
+          "min_500_query_window_lower_bound": 0.9824,
+          "windows": 1822,
+          "page_lock_wait_ns": 4583180314
+        },
+        {
+          "alpha": 0.9,
+          "L": 64,
+          "queries": 2320,
+          "recall_lower_bound": 0.977069,
+          "min_500_query_window_lower_bound": 0.9762,
+          "windows": 1821,
+          "page_lock_wait_ns": 4202628024
+        }
+      ],
+      "passed": true
+    },
+    "query_count": 6962,
+    "operation_kinds": {
+      "i": 591,
+      "d": 309,
+      "m": 100
+    },
+    "mean_query_page_lock_wait_us": 1975.9909395288712,
+    "raw_counts_verified": true
+  }
+}

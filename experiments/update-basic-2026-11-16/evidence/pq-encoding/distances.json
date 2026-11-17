@@ -1,0 +1,49 @@
+{
+  "emb": {
+    "nodes": 2,
+    "bytes": 2,
+    "initial_bytes": 0,
+    "details": [
+      {
+        "id": 1811382,
+        "tag": 1811382,
+        "chunk": 47,
+        "actual": 139,
+        "frozen": 192,
+        "actual_squared_distance": 0.0039001700859266557,
+        "frozen_squared_distance": 0.0039001724448258293,
+        "float64_min_code": 139,
+        "squared_distance_gap": 2.358899173649648e-09
+      },
+      {
+        "id": 1827436,
+        "tag": 1827436,
+        "chunk": 14,
+        "actual": 135,
+        "frozen": 218,
+        "actual_squared_distance": 0.0032707269814168417,
+        "frozen_squared_distance": 0.00327072738177645,
+        "float64_min_code": 135,
+        "squared_distance_gap": 4.0035960831297235e-10
+      }
+    ]
+  },
+  "loc": {
+    "nodes": 1,
+    "bytes": 1,
+    "initial_bytes": 0,
+    "details": [
+      {
+        "id": 1828858,
+        "tag": 1828858,
+        "chunk": 63,
+        "actual": 224,
+        "frozen": 17,
+        "actual_squared_distance": 0.0026016014415271944,
+        "frozen_squared_distance": 0.0026016030822280847,
+        "float64_min_code": 224,
+        "squared_distance_gap": 1.6407008902527553e-09
+      }
+    ]
+  }
+}

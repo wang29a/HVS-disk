@@ -1,0 +1,49 @@
+{
+  "status": "BASE_GRAPH_FAILS_G1_BEFORE_ANY_UPDATE",
+  "nodes": 10000,
+  "reachable": 9999,
+  "entries": [
+    2771,
+    3246,
+    4143,
+    9545,
+    4097,
+    8126,
+    2416,
+    3551,
+    9315,
+    6461
+  ],
+  "unreachable": [
+    8947
+  ],
+  "raw_compact_ordered_adjacency_equal": true,
+  "completed_update_operations": 0,
+  "counterexamples": [
+    {
+      "local_id": 8947,
+      "original_2m_subset_id": 1789839,
+      "out_degree": 1,
+      "out_neighbors": [
+        118
+      ],
+      "in_neighbors": [],
+      "candidate_repair_predecessor": {
+        "id": 118,
+        "current_degree": 1,
+        "new_degree_if_append": 2,
+        "R": 40,
+        "proposed_change": "append 8947 to node 118 only in an experimental copy; not applied; general repair policy still requires design decision"
+      }
+    }
+  ],
+  "identities": {
+    "/mnt/nvme3/wz/hvs-disk-build-20261027/experiments/backlink-ab-20261115/runtime/gate-graphs/B/float-graph.bin": "04bc4e5523a2c9a6d3a8c6114d9953935a8ce3977c03ccac55645a74c4c34fd1",
+    "/mnt/nvme3/wz/hvs-disk-build-20261027/experiments/backlink-ab-20261115/runtime/function-v2/capture-graph/float-graph.bin": "04bc4e5523a2c9a6d3a8c6114d9953935a8ce3977c03ccac55645a74c4c34fd1",
+    "/mnt/nvme3/wz/hvs-disk-build-20261027/experiments/backlink-ab-20261115/runtime/statistical-v2/packed/B/compact.meta": "807591013e71fed27208f3297b245aeaef5c12c2b355e4aa02b16eb09682ac14",
+    "/mnt/nvme3/wz/hvs-disk-build-20261027/experiments/backlink-ab-20261115/runtime/statistical-v2/packed/B/compact.topo": "f9081c80ffbfcf8929b5375d367248fe6060e7e7860d091cc51c81dd6e69966c",
+    "/mnt/nvme3/wz/hvs-disk-build-20261027/experiments/update-basic-2026-11-16/runtime/g1/pq/index.meta": "807591013e71fed27208f3297b245aeaef5c12c2b355e4aa02b16eb09682ac14",
+    "/mnt/nvme3/wz/hvs-disk-build-20261027/experiments/update-basic-2026-11-16/runtime/g1/pq/graph.pages": "f9081c80ffbfcf8929b5375d367248fe6060e7e7860d091cc51c81dd6e69966c"
+  },
+  "scope": "read-only independent Python BFS over immutable original B and packed adjacency; no updater involved"
+}

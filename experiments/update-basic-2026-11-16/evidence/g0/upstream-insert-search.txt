@@ -1,0 +1,105 @@
+[test_insert_search.cpp:372:INFO] num insert threads: 1
+[test_insert_search.cpp:373:INFO] num search threads: 1
+[test_insert_search.cpp:376:INFO] search mode: 3
+[test_insert_search.cpp:257:INFO] Loading queries
+[utils.h:221:INFO] Reading bin file /mnt/nvme3/wz/hvs-disk-build-20261027/experiments/update-basic-2026-11-16/runtime/g0-attempt2/fixture/queries.bin ...
+[utils.h:191:INFO] Metadata: #pts = 8, #dims = 8...
+[ssd_index.cpp:133:INFO] Beamwidth: 1, L: 64, R: 0, C: 384
+[ssd_index.cpp:285:INFO] 128 8 8 40 0 49 1
+[ssd_index.cpp:286:INFO] 64 4 164 128 49
+[ssd_index.cpp:289:ERROR] Range mismatch: 40 vs 0, setting range to 40
+[ssd_index.cpp:293:INFO] Meta-data: # nodes per sector: 49, max node len (bytes): 164, max node degree: 40, npts: 128, dim: 8
+[ssd_index.cpp:365:INFO] Size per IO: 8192
+[ssd_index.cpp:374:INFO] After single file index check, Tags offset: 0 PQ Pivots offset: 0 PQ Vectors offset: 0
+[utils.h:236:INFO] Reading bin file /mnt/nvme3/wz/hvs-disk-build-20261027/experiments/update-basic-2026-11-16/runtime/g0-attempt2/fixture/smallemb_pq_compressed.bin ...
+[utils.h:208:INFO] Metadata: #pts = 128, #dims = 1...
+[utils.h:236:INFO] Reading bin file /mnt/nvme3/wz/hvs-disk-build-20261027/experiments/update-basic-2026-11-16/runtime/g0-attempt2/fixture/smallloc_pq_compressed.bin ...
+[utils.h:208:INFO] Metadata: #pts = 128, #dims = 1...
+[utils.h:236:INFO] Reading bin file /mnt/nvme3/wz/hvs-disk-build-20261027/experiments/update-basic-2026-11-16/runtime/g0-attempt2/fixture/small_pq_compressed_2.bin ...
+[utils.h:208:INFO] Metadata: #pts = 128, #dims = 1...
+[ssd_index.cpp:594:WARNING] Alpha range file not found: /mnt/nvme3/wz/hvs-disk-build-20261027/experiments/update-basic-2026-11-16/runtime/g0-attempt2/fixture/small_disk.index.alpha, alpha filtering disabled
+[ssd_index.cpp:395:INFO] Load compressed vectors from file: /mnt/nvme3/wz/hvs-disk-build-20261027/experiments/update-basic-2026-11-16/runtime/g0-attempt2/fixture/smallemb_pq_compressed.bin offset: 0 num points: 128 n_chunks: 1
+[utils.h:191:INFO] Metadata: #pts = 5, #dims = 1...
+[utils.h:191:INFO] Metadata: #pts = 256, #dims = 8...
+[utils.h:191:INFO] Metadata: #pts = 8, #dims = 1...
+[utils.h:191:INFO] Metadata: #pts = 8, #dims = 1...
+[utils.h:191:INFO] Metadata: #pts = 2, #dims = 1...
+[pq_table.h:95:INFO] Loaded PQ Pivots: #ctrs: 256, #dims: 8, #chunks: 1
+[pq_table.h:150:INFO] Finished optimizing for PQ-PQ distance compuation
+[utils.h:191:INFO] Metadata: #pts = 5, #dims = 1...
+[utils.h:191:INFO] Metadata: #pts = 256, #dims = 8...
+[utils.h:191:INFO] Metadata: #pts = 8, #dims = 1...
+[utils.h:191:INFO] Metadata: #pts = 8, #dims = 1...
+[utils.h:191:INFO] Metadata: #pts = 2, #dims = 1...
+[pq_table.h:95:INFO] Loaded PQ Pivots: #ctrs: 256, #dims: 8, #chunks: 1
+[pq_table.h:150:INFO] Finished optimizing for PQ-PQ distance compuation
+[utils.h:191:INFO] Metadata: #pts = 5, #dims = 1...
+[utils.h:191:INFO] Metadata: #pts = 256, #dims = 8...
+[utils.h:191:INFO] Metadata: #pts = 8, #dims = 1...
+[utils.h:191:INFO] Metadata: #pts = 8, #dims = 1...
+[utils.h:191:INFO] Metadata: #pts = 2, #dims = 1...
+[pq_table.h:95:INFO] Loaded PQ Pivots: #ctrs: 256, #dims: 8, #chunks: 1
+[pq_table.h:150:INFO] Finished optimizing for PQ-PQ distance compuation
+[ssd_index.cpp:431:INFO] Building PQ1 -> PQ2 all-to-all table ...
+[ssd_index.cpp:484:INFO] min_dist: 0 max_dist: 67.7917
+[ssd_index.cpp:487:INFO] Built PQ cross all-to-all table, size=262144 floats.
+======== Start to load map
+======== End to load map
+Loaded map: N=128 chunks=1 bytes=192
+[ssd_index.cpp:526:INFO] Loaded PQ centroids and in-memory compressed vectors. #points: 128 #dim: 8 #aligned_dim: 8 #chunks: 1
+***************************
+STRATEGY: 5
+***************************
+Index folder is /mnt/nvme3/wz/hvs-disk-build-20261027/experiments/update-basic-2026-11-16/runtime/g0-attempt2/fixture/
+[linux_aligned_file_reader.cpp:387:INFO] pq trunc_len: 24
+coord_path is /mnt/nvme3/wz/hvs-disk-build-20261027/experiments/update-basic-2026-11-16/runtime/g0-attempt2/fixture/disk_index_data
+topo_path is /mnt/nvme3/wz/hvs-disk-build-20261027/experiments/update-basic-2026-11-16/runtime/g0-attempt2/fixture/disk_index_graph
+[ssd_index.cpp:156:INFO] Init buffers for 2 threads, setup 4 buffers.
+[ssd_index.cpp:173:INFO] Setup 1 background I/O threads for insert...
+[page_search.cpp:177:INFO] Cur Topo location: 147
+[page_search.cpp:178:INFO] Cur Coord location: 128
+[page_search.cpp:179:INFO] Page layout loaded.
+[page_search.cpp:225:INFO] /mnt/nvme3/wz/hvs-disk-build-20261027/experiments/update-basic-2026-11-16/runtime/g0-attempt2/fixture/small_partition.bin.aligned does not exist, use equal partition mapping
+[page_search.cpp:258:INFO] Cur location: 147
+[page_search.cpp:259:INFO] Page layout loaded.
+[ssd_index.cpp:554:INFO] Loading tags from /mnt/nvme3/wz/hvs-disk-build-20261027/experiments/update-basic-2026-11-16/runtime/g0-attempt2/fixture/small_disk.index.tags
+[utils.h:60:INFO]  Stat(/mnt/nvme3/wz/hvs-disk-build-20261027/experiments/update-basic-2026-11-16/runtime/g0-attempt2/fixture/small_disk.index.tags) returned: -1
+[utils.h:67:INFO] File /mnt/nvme3/wz/hvs-disk-build-20261027/experiments/update-basic-2026-11-16/runtime/g0-attempt2/fixture/small_disk.index.tags does not exist
+[ssd_index.cpp:833:INFO] Tags file not found. Using equal mapping
+[ssd_index.cpp:846:INFO] Loaded 0 tags
+[ssd_index.cpp:586:INFO] SSDIndex loaded successfully.
+[test_insert_search.cpp:267:INFO] Searching before inserts: 
+[test_insert_search.cpp:66:INFO] Truth file name: /mnt/nvme3/wz/hvs-disk-build-20261027/experiments/update-basic-2026-11-16/runtime/g0-attempt2/fixture/truth/gt_0.bin
+[test_insert_search.cpp:53:INFO]  memory current time: 0 RSS : 404120 KB /mnt/nvme3/wz/hvs-disk-build-20261027/experiments/update-basic-2026-11-16/runtime/g0-attempt2/fixture/small_disk.index Index size 0 MB
+[utils.h:60:INFO]  Stat(/mnt/nvme3/wz/hvs-disk-build-20261027/experiments/update-basic-2026-11-16/runtime/g0-attempt2/fixture/truth/gt_0.bin) returned: 0
+[test_insert_search.cpp:111:INFO] current truthfile: /mnt/nvme3/wz/hvs-disk-build-20261027/experiments/update-basic-2026-11-16/runtime/g0-attempt2/fixture/truth/gt_0.bin
+[utils.h:288:INFO] Reading truthset file /mnt/nvme3/wz/hvs-disk-build-20261027/experiments/update-basic-2026-11-16/runtime/g0-attempt2/fixture/truth/gt_0.bin...
+[utils.h:297:INFO] Metadata: #pts = 8, #dims = 10...
+[utils.h:327:INFO] truthset type: 1
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+  64     1805.37             0.532       0.355       1.752       1.752       1.752       1.752         100           3
+[test_insert_search.cpp:173:INFO] search current time: 0
+[test_insert_search.cpp:287:INFO] Batch: 0 Total Batch : 1
+[test_insert_search.cpp:294:INFO] st: 0 ed: 128
+[test_insert_search.cpp:216:INFO] l_start: 0 r_start: 128 n: 8
+[test_insert_search.cpp:192:INFO] Begin Insert
+[test_insert_search.cpp:205:INFO] Inserted 8 points in 0.004903s
+[test_insert_search.cpp:206:INFO] 10p insertion time : 501 us
+[test_insert_search.cpp:207:INFO] 50p insertion time : 529 us
+[test_insert_search.cpp:208:INFO] 90p insertion time : 764 us
+[test_insert_search.cpp:209:INFO] 99p insertion time : 764 us
+[test_insert_search.cpp:210:INFO] 99.9p insertion time : 764 us
+[test_insert_search.cpp:319:INFO] Insertions complete!
+
+[test_insert_search.cpp:325:INFO] Search after update, current vector number: 0
+[test_insert_search.cpp:66:INFO] Truth file name: /mnt/nvme3/wz/hvs-disk-build-20261027/experiments/update-basic-2026-11-16/runtime/g0-attempt2/fixture/truth/gt_8.bin
+[utils.h:60:INFO]  Stat(/mnt/nvme3/wz/hvs-disk-build-20261027/experiments/update-basic-2026-11-16/runtime/g0-attempt2/fixture/truth/gt_8.bin) returned: 0
+[test_insert_search.cpp:111:INFO] current truthfile: /mnt/nvme3/wz/hvs-disk-build-20261027/experiments/update-basic-2026-11-16/runtime/g0-attempt2/fixture/truth/gt_8.bin
+[utils.h:288:INFO] Reading truthset file /mnt/nvme3/wz/hvs-disk-build-20261027/experiments/update-basic-2026-11-16/runtime/g0-attempt2/fixture/truth/gt_8.bin...
+[utils.h:297:INFO] Metadata: #pts = 8, #dims = 10...
+[utils.h:327:INFO] truthset type: 1
+  Ls        QPS           Mean Lat      50 Lat      90 Lat      95 Lat      99 Lat    99.9 Lat   Recall@10    Disk IOs
+==============================================================================
+  64     3717.05             0.258       0.263       0.281       0.281       0.281       0.281         100           4
+[test_insert_search.cpp:173:INFO] search current time: 0

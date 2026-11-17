@@ -1,0 +1,135 @@
+{
+  "source": "/mnt/pmem0/hvs-update-basic-2026-11-16/e1-degree-protected",
+  "reference_identity": {
+    "meta": "8f9db09c2c536c840ddead8d622d9c2c72a0ed90b85df5557bef3575fcab3537",
+    "topology": "8aa7fd990d7ef35488380485553026d00e36e268fade7c417ee8cc695cc79091",
+    "coordinates": "e1116b4ba6b85644234437199525b824e3f8c309f0b55733dd3ce89ea5e105ab",
+    "graph": {
+      "build": {
+        "signature": {
+          "binary": "ac9943a4c7d00b89c59012f32cde85f4bbad427996c8f28cefb97237a2ac3ae6",
+          "data": "ff094c6c8175adc4f4a6d3f58e26a75357e52af459f87e67c214c7b7b550d837",
+          "R": 40,
+          "L": 200,
+          "C": 750,
+          "threads": 8,
+          "numa": 3
+        },
+        "graph_sha256": "a3d32874bb81bba6c80ad5f4051fa2c06cd5c9e0547c8af670a8e8a9278390a0",
+        "wall_seconds": 2058.284203529358,
+        "reverse_insert_stats": {
+          "reverse_always_prune": 1,
+          "insert_calls": 1999999,
+          "reverse_targets": 58960122,
+          "B_reprunes": 58960122,
+          "final_cleanup_changed_nodes": 0
+        }
+      },
+      "stats": {
+        "status": "PASS",
+        "nodes": 2000000,
+        "d1": 512,
+        "d2": 512,
+        "edges": 56997951,
+        "mean_degree": 28.4989755,
+        "max_degree": 40,
+        "float_pairs": 73314381,
+        "mean_active_width": 0.4780336200401489,
+        "max_float_slots": 8,
+        "max_quantized_slots": 8,
+        "export_checked": true,
+        "degree_histogram": [
+          0,
+          6933,
+          416,
+          848,
+          1762,
+          2952,
+          4661,
+          7254,
+          10115,
+          13781,
+          17529,
+          21882,
+          26675,
+          31038,
+          35480,
+          39761,
+          43851,
+          47417,
+          50649,
+          53268,
+          55251,
+          57771,
+          58518,
+          58687,
+          59652,
+          59706,
+          59689,
+          59533,
+          59204,
+          57911,
+          58364,
+          57952,
+          57687,
+          56966,
+          57956,
+          58930,
+          61151,
+          64703,
+          70934,
+          82008,
+          371155
+        ],
+        "active_fractions": [
+          0.3819662745420445,
+          0.4463782741944531,
+          0.4962963844086255,
+          0.5317547292182485,
+          0.5531667796268677
+        ],
+        "quantized_active_fractions": [
+          0.3958367906944585,
+          0.4577046638044936,
+          0.5158562805178734,
+          0.5504115226878945,
+          0.5643837091617556
+        ]
+      },
+      "files": {
+        "compact.meta": {
+          "bytes": 8192
+        },
+        "compact.topo": {
+          "bytes": 334372864
+        },
+        "ranges.bin": {
+          "bytes": 1280000000
+        }
+      },
+      "pack": {
+        "source": {
+          "raw": "a3d32874bb81bba6c80ad5f4051fa2c06cd5c9e0547c8af670a8e8a9278390a0",
+          "meta": "30fcd5cee238fe1d6a14c7072a6424b144af1685fecf9598c4b2adea7d0f52fb",
+          "entries": "30fcd5cee238fe1d6a14c7072a6424b144af1685fecf9598c4b2adea7d0f52fb",
+          "packer": "ef6f3ea65c6bc84667d735133c418104aae12f0ccc2677ae4c6b7aa98d86de2d"
+        },
+        "stats": {
+          "nodes": 2000000,
+          "edges": 56997951,
+          "mean_degree": 28.499,
+          "record_bytes": 164,
+          "nodes_per_page": 49,
+          "range_slots": 8
+        },
+        "files": {
+          "compact.meta": "8f9db09c2c536c840ddead8d622d9c2c72a0ed90b85df5557bef3575fcab3537",
+          "compact.topo": "8aa7fd990d7ef35488380485553026d00e36e268fade7c417ee8cc695cc79091",
+          "ranges.bin": "0eab59f944cd661eb8943f42ff358c8fa40378f21f8dabeee13e4a1a705f6077"
+        }
+      }
+    }
+  },
+  "initial_identity": "f1b0163356e37d31ad842880324f14ca6158489084ef18ca7bbe75a4bf81cf35",
+  "reason": "same C++ executor, immutable graph, data, PQ codebooks, query engine and device placement; only snapshot-code validation was corrected"
+}

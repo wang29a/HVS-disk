@@ -1,0 +1,7 @@
+{
+  "stage": "G1_PASSED_BOTH_DISTANCES",
+  "updated_unix": 1794902739.5425365,
+  "G2": "NOT_RUN",
+  "G3": "NOT_RUN",
+  "G4": "requires G2 in both modes"
+}

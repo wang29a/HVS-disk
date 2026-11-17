@@ -1,0 +1,1 @@
+IN_DEGREE_GUARD_PASS spare=1 full=1 last_mandatory=1 pending=1 conflict=1 concurrent=1

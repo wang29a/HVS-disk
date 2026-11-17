@@ -1,0 +1,60 @@
+{
+  "revision": 3,
+  "G0": "REUSED_PASS",
+  "prune_semantics": "REUSED_10000_BIT_EXACT_PASS",
+  "G1": {
+    "pq": {
+      "status": "PASS",
+      "operations": {
+        "consolidate": 100,
+        "delete": 309,
+        "insert": 591
+      },
+      "audits": 1002,
+      "U0": [
+        8947
+      ],
+      "final": {
+        "op": 1001,
+        "merged": true,
+        "allocated": 10591,
+        "living": 10282,
+        "baseline_U0_size": 1,
+        "unreachable_live": 1,
+        "new_unreachable": 0,
+        "inserted_unreachable": 0,
+        "recovered_U0": []
+      },
+      "live_U0_recovered_at_any_checked_boundary": []
+    },
+    "exact": {
+      "status": "PASS",
+      "operations": {
+        "consolidate": 100,
+        "delete": 309,
+        "insert": 591
+      },
+      "audits": 1002,
+      "U0": [
+        8947
+      ],
+      "final": {
+        "op": 1001,
+        "merged": true,
+        "allocated": 10591,
+        "living": 10282,
+        "baseline_U0_size": 1,
+        "unreachable_live": 1,
+        "new_unreachable": 0,
+        "inserted_unreachable": 0,
+        "recovered_U0": []
+      },
+      "live_U0_recovered_at_any_checked_boundary": []
+    }
+  },
+  "G2": "NOT_RUN",
+  "G3": "NOT_RUN",
+  "G4": "NOT_PASSED_REQUIRES_G2_BOTH_MODES",
+  "graph_repair_applied": false,
+  "pruning_changes_applied": false
+}

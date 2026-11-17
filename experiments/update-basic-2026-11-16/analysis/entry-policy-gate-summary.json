@@ -1,0 +1,53 @@
+{
+  "source": "runtime/g1-entry-parity/build-identity.json",
+  "entry_policy": "verified B maximizing skyline; 100000 prefix reference checks",
+  "G1": "PASSED_BOTH_DISTANCES",
+  "modes": {
+    "pq": {
+      "audits": 1002,
+      "final_audit": {
+        "op": 1001,
+        "merged": true,
+        "allocated": 10591,
+        "living": 10282,
+        "baseline_U0_size": 1,
+        "unreachable_live": 1,
+        "new_unreachable": 0,
+        "inserted_unreachable": 0,
+        "recovered_U0": []
+      },
+      "random_operation_counts": {
+        "insert": 591,
+        "delete": 309,
+        "consolidate": 100
+      },
+      "final_cleanup_merges": 1
+    },
+    "exact": {
+      "audits": 1002,
+      "final_audit": {
+        "op": 1001,
+        "merged": true,
+        "allocated": 10591,
+        "living": 10282,
+        "baseline_U0_size": 1,
+        "unreachable_live": 1,
+        "new_unreachable": 0,
+        "inserted_unreachable": 0,
+        "recovered_U0": []
+      },
+      "random_operation_counts": {
+        "insert": 591,
+        "delete": 309,
+        "consolidate": 100
+      },
+      "final_cleanup_merges": 1
+    }
+  },
+  "G2": "PASSED_BOTH_DISTANCES",
+  "G3": "PASSED_ASAN_AND_TSAN_600S_EACH",
+  "G4": "PASSED_G1_AND_G2_BOTH",
+  "E1": "NOT_STARTED_USER_CHECKPOINT",
+  "G2_results": "runtime/g2-entry-parity/comparisons.json",
+  "G3_results": "analysis/g3-verified-summary.json"
+}

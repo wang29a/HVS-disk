@@ -1,0 +1,12 @@
+{
+  "component": "post-build Python diagnostic processing",
+  "observed_status_unix": 1794833832.1480668,
+  "error": "KeyError: 'reprune_calls'",
+  "actual_counter_key": "B_reprunes",
+  "builder_exit_code": 0,
+  "original_runner": "runtime/revision3-openimages-ab/runner-build-original.py",
+  "recovery": "Identity-checked resume of completed graph, no second build",
+  "B_source_or_graph_modified": false,
+  "rebuild": false,
+  "reused_graph_sha256": "9895a95c0ba1feea9351045b6873efe8ffeb9dbd2fe5fb351c889170875a6c28"
+}

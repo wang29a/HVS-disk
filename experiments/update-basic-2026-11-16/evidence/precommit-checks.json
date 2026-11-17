@@ -1,0 +1,10 @@
+{
+  "core_linux_source_identity": "MATCHED_PASSED_NODE3_G1_AND_LARGE_REPLAY",
+  "python_unittests": {
+    "count": 11,
+    "status": "PASSED"
+  },
+  "local_cpp_guard": "IN_DEGREE_GUARD_PASS spare=1 full=1 last_mandatory=1 pending=1 conflict=1 concurrent=1",
+  "local_cpp_entry": "ENTRY_FRONTIER_PARITY_PASS prefixes=100000 farther=1 equal_distance_highest_id=1",
+  "scope": "Pure C++ checks compiled on macOS; full executor Linux build and sanitizer evidence retained separately; E1 continues unchanged"
+}

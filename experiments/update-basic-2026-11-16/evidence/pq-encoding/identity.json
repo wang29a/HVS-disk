@@ -1,0 +1,203 @@
+{
+  "status": "ONLINE_CODES_MATCH_SCALAR_ENCODER",
+  "checks": [
+    {
+      "label": "formal",
+      "proof": {
+        "policy": "initial codes must equal frozen bulk; inserted codes must equal upstream scalar encoder; actual codes are measured and never replaced",
+        "scalar_reference": "/mnt/nvme3/wz/hvs-disk-build-20261027/experiments/update-basic-2026-11-16/runtime/online-pq-audit-v1",
+        "spaces": {
+          "emb": {
+            "different_from_bulk_bytes": 2,
+            "different_from_bulk_nodes": 2,
+            "details": [
+              {
+                "internal_id": 1811382,
+                "tag": 1811382,
+                "chunk": 47,
+                "actual": 139,
+                "bulk": 192
+              },
+              {
+                "internal_id": 1827436,
+                "tag": 1827436,
+                "chunk": 14,
+                "actual": 135,
+                "bulk": 218
+              }
+            ],
+            "all_inserted_equal_online_scalar": true,
+            "initial_codes_unchanged": true
+          },
+          "loc": {
+            "different_from_bulk_bytes": 1,
+            "different_from_bulk_nodes": 1,
+            "details": [
+              {
+                "internal_id": 1828858,
+                "tag": 1828858,
+                "chunk": 63,
+                "actual": 224,
+                "bulk": 17
+              }
+            ],
+            "all_inserted_equal_online_scalar": true,
+            "initial_codes_unchanged": true
+          }
+        }
+      }
+    },
+    {
+      "label": "replay",
+      "proof": {
+        "policy": "initial codes must equal frozen bulk; inserted codes must equal upstream scalar encoder; actual codes are measured and never replaced",
+        "scalar_reference": "/mnt/nvme3/wz/hvs-disk-build-20261027/experiments/update-basic-2026-11-16/runtime/online-pq-audit-v1",
+        "spaces": {
+          "emb": {
+            "different_from_bulk_bytes": 2,
+            "different_from_bulk_nodes": 2,
+            "details": [
+              {
+                "internal_id": 1811382,
+                "tag": 1811382,
+                "chunk": 47,
+                "actual": 139,
+                "bulk": 192
+              },
+              {
+                "internal_id": 1827436,
+                "tag": 1827436,
+                "chunk": 14,
+                "actual": 135,
+                "bulk": 218
+              }
+            ],
+            "all_inserted_equal_online_scalar": true,
+            "initial_codes_unchanged": true
+          },
+          "loc": {
+            "different_from_bulk_bytes": 1,
+            "different_from_bulk_nodes": 1,
+            "details": [
+              {
+                "internal_id": 1828858,
+                "tag": 1828858,
+                "chunk": 63,
+                "actual": 224,
+                "bulk": 17
+              }
+            ],
+            "all_inserted_equal_online_scalar": true,
+            "initial_codes_unchanged": true
+          }
+        }
+      }
+    }
+  ],
+  "command": [
+    "g++-11",
+    "-DDELTA_PRUNING",
+    "-DDYN_PIPE_WIDTH",
+    "-DENABLE_PQ_GEN",
+    "-DNDEBUG",
+    "-DOVERLAP_INIT",
+    "-DUSE_AIO",
+    "-DUSE_AVX512",
+    "-I/mnt/nvme3/wz/hvs-disk-build-20261027/source/include",
+    "-I/mnt/nvme3/wz/hvs-disk-build-20261027/source/include/tsl/include",
+    "-I/usr/include/mkl",
+    "-I/mnt/nvme3/wz/hvs-disk-build-20261027/source/third_party/liburing/src/include",
+    "-I/mnt/nvme2/wz/disk/local/openblas/include",
+    "-static-libstdc++",
+    "-static-libgcc",
+    "-fopenmp",
+    "-O3",
+    "-DNDEBUG",
+    "-DREORDER_COMPUTE_PQ",
+    "-DUSE_TOPO_DISK",
+    "-fopenmp",
+    "-fopenmp-simd",
+    "-Wall",
+    "-Wextra",
+    "-Wfatal-errors",
+    "-Wno-class-memaccess",
+    "-Wno-unused-variable",
+    "-Wno-unused-parameter",
+    "-Wno-unused-but-set-variable",
+    "-g",
+    "-Ofast",
+    "-march=native",
+    "-mtune=native",
+    "-ftree-vectorize",
+    "-funroll-loops",
+    "-std=gnu++17",
+    "-I/mnt/nvme3/wz/hvs-disk-build-20261027/experiments/update-basic-2026-11-16/implementation",
+    "-fno-fast-math",
+    "-ffp-contract=off",
+    "/mnt/nvme3/wz/hvs-disk-build-20261027/experiments/update-basic-2026-11-16/implementation/online_pq_audit.cpp",
+    "/mnt/nvme3/wz/hvs-disk-build-20261027/build-separated/src/libpipeann.a",
+    "-L/mnt/nvme2/wz/disk/local/openblas/lib",
+    "-laio",
+    "-ljemalloc",
+    "-lopenblas",
+    "-pthread",
+    "-o",
+    "/mnt/nvme3/wz/hvs-disk-build-20261027/experiments/update-basic-2026-11-16/runtime/online-pq-audit-v1/encoder"
+  ],
+  "flags": [
+    "-DDELTA_PRUNING",
+    "-DDYN_PIPE_WIDTH",
+    "-DENABLE_PQ_GEN",
+    "-DNDEBUG",
+    "-DOVERLAP_INIT",
+    "-DUSE_AIO",
+    "-DUSE_AVX512",
+    "-I/mnt/nvme3/wz/hvs-disk-build-20261027/source/include",
+    "-I/mnt/nvme3/wz/hvs-disk-build-20261027/source/include/tsl/include",
+    "-I/usr/include/mkl",
+    "-I/mnt/nvme3/wz/hvs-disk-build-20261027/source/third_party/liburing/src/include",
+    "-I/mnt/nvme2/wz/disk/local/openblas/include",
+    "-static-libstdc++",
+    "-static-libgcc",
+    "-fopenmp",
+    "-O3",
+    "-DNDEBUG",
+    "-DREORDER_COMPUTE_PQ",
+    "-DUSE_TOPO_DISK",
+    "-fopenmp",
+    "-fopenmp-simd",
+    "-Wall",
+    "-Wextra",
+    "-Wfatal-errors",
+    "-Wno-class-memaccess",
+    "-Wno-unused-variable",
+    "-Wno-unused-parameter",
+    "-Wno-unused-but-set-variable",
+    "-g",
+    "-Ofast",
+    "-march=native",
+    "-mtune=native",
+    "-ftree-vectorize",
+    "-funroll-loops",
+    "-std=gnu++17",
+    "-I/mnt/nvme3/wz/hvs-disk-build-20261027/experiments/update-basic-2026-11-16/implementation",
+    "-fno-fast-math",
+    "-ffp-contract=off"
+  ],
+  "source_sha256": "c4fc771c7771e21127344c6b154d59efbd337d2f1d23e4f87871d843120b41a8",
+  "upstream_encoder_header": "1fb42855be092c19f462caeaaeffd18177899a6eb861a7e40c36a87798c771fa",
+  "binary": "d49f0452620eca6577fed5bc0496e82b93338c4f2006d45df53475ff32937f18",
+  "files": {
+    "emb_pq_compressed.bin": "0c9e7d400ed541ba78a0e0580b46a8e6577e842f32f40dc62d1e07b76a0ba536",
+    "loc_pq_compressed.bin": "36f11a685b645aa879594db4336c0b6fbccbf4cc222aed497ec0da663bc7f901"
+  },
+  "inputs": {
+    "/mnt/pmem0/hvs-update-basic-2026-11-16/e1-degree-protected/inputs/insert-x.bin": "3c2255645b27a4c0a24f76869e5ce5b84b8b78dd3edeee92341e617b97da02c0",
+    "/mnt/pmem0/hvs-update-basic-2026-11-16/e1-degree-protected/inputs/insert-y.bin": "0398e31b0f5218ee0db02d9cd5199501ed72c41d5c072b0b6ff4a416dfac0eeb"
+  },
+  "pivots": {
+    "emb": "2317b91314db7be9e5ddb0c18e109d364a24a3888b8639593c5ff491eac8164c",
+    "loc": "f7c3828e7d33e24db71d1ffdb0df42fca0728f379473bd8eec875b8055ddf656"
+  },
+  "purpose": "audit reference only; update executor still computes every inserted code online"
+}

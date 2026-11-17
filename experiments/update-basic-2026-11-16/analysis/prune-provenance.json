@@ -1,0 +1,16 @@
+{
+  "verified_source": "/mnt/nvme3/wz/hvs-disk-build-20261027/experiments/backlink-ab-20261115/runtime/build/hybrid_index.cpp",
+  "verified_source_sha256": "0091444ced1e390888bf4dc79a771cbdc320bd39fe1e234b3244f0eaa9827b8b",
+  "original_formal_source_sha256": "fe6be5622a486006ec9bebcd4f027619c3cbb7a30b16af9cb83da6565292bf08",
+  "function_gate": "/mnt/nvme3/wz/hvs-disk-build-20261027/experiments/backlink-ab-20261115/runtime/function-v2/validation/function-gate.json",
+  "helpers_source": "/mnt/nvme3/wz/hvs-disk-build-20261027/experiments/u-shape-20261113/scripts/pruning_semantics.h",
+  "helpers_sha256": "dd504c3649962fe0830a6568d8424b6164be186af4905e81864926d81f81b869",
+  "extracted_source_sha256": "ecf13c0c5fadcf6d4fdee3a8e90f1058c9d52c91a2e3c0bcf9a99ae2b9b31356",
+  "transformations": [
+    "remove legacy-only telemetry",
+    "inject pair-distance provider instead of global vector arrays",
+    "pass degree directly",
+    "unchanged skyline/interval helper bodies"
+  ],
+  "semantic_replay": "required before engine use"
+}

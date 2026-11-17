@@ -1,0 +1,167 @@
+{
+  "0.1": {
+    "inserted": [
+      0,
+      50000,
+      100000,
+      150000,
+      200000
+    ],
+    "expanded": [
+      86.80284018264832,
+      89.20750537634402,
+      93.70713580246897,
+      91.4247246376811,
+      90.73085477178418
+    ],
+    "increase_vs_R1": [
+      0.010455951400021757,
+      0.03844821813900823,
+      0.09082759113661476,
+      0.06425846113869116,
+      0.05618124921777512
+    ],
+    "step_change_pp": [
+      2.799226673898647,
+      5.237937299760653,
+      -2.65691299979236,
+      -0.8077211920916039
+    ],
+    "strictly_increasing_all_checkpoints": false,
+    "nondecreasing_all_checkpoints": false,
+    "net_change_pp": 4.572529781775336,
+    "scope": "fixed 2M full B denominator; each checkpoint uses its own live-set GT; prefix size changes, so this is descriptive, not an isolated causal effect"
+  },
+  "0.3": {
+    "inserted": [
+      0,
+      50000,
+      100000,
+      150000,
+      200000
+    ],
+    "expanded": [
+      59.07472727272715,
+      67.623135135135,
+      72.60007643312093,
+      70.99193442622946,
+      73.40881632653054
+    ],
+    "increase_vs_R1": [
+      -0.013034685465917129,
+      0.12978412122507987,
+      0.2129342035082713,
+      0.18606687030299618,
+      0.22644587355949763
+    ],
+    "step_change_pp": [
+      14.2818806690997,
+      8.315008228319144,
+      -2.6867333205275123,
+      4.037900325650146
+    ],
+    "strictly_increasing_all_checkpoints": false,
+    "nondecreasing_all_checkpoints": false,
+    "net_change_pp": 23.948055902541476,
+    "scope": "fixed 2M full B denominator; each checkpoint uses its own live-set GT; prefix size changes, so this is descriptive, not an isolated causal effect"
+  },
+  "0.5": {
+    "inserted": [
+      0,
+      50000,
+      100000,
+      150000,
+      200000
+    ],
+    "expanded": [
+      54.68939726027396,
+      62.05568888888871,
+      66.0577894736841,
+      64.3767401574803,
+      62.99133333333314
+    ],
+    "increase_vs_R1": [
+      -0.10205316999763558,
+      0.018894189968833297,
+      0.08460479775565655,
+      0.057003599348240064,
+      0.034256563755835634
+    ],
+    "step_change_pp": [
+      12.094735996646888,
+      6.571060778682325,
+      -2.7601198407416483,
+      -2.274703559240443
+    ],
+    "strictly_increasing_all_checkpoints": false,
+    "nondecreasing_all_checkpoints": false,
+    "net_change_pp": 13.630973375347121,
+    "scope": "fixed 2M full B denominator; each checkpoint uses its own live-set GT; prefix size changes, so this is descriptive, not an isolated causal effect"
+  },
+  "0.7": {
+    "inserted": [
+      0,
+      50000,
+      100000,
+      150000,
+      200000
+    ],
+    "expanded": [
+      63.94282089552226,
+      71.08305479452046,
+      73.31181456953632,
+      73.2047346938774,
+      69.61510559006203
+    ],
+    "increase_vs_R1": [
+      0.04168749299801844,
+      0.15800848487011399,
+      0.19431703601027284,
+      0.19257260613271177,
+      0.1340942392171227
+    ],
+    "step_change_pp": [
+      11.632099187209555,
+      3.630855114015885,
+      -0.17444298775610712,
+      -5.847836691558905
+    ],
+    "strictly_increasing_all_checkpoints": false,
+    "nondecreasing_all_checkpoints": false,
+    "net_change_pp": 9.240674621910427,
+    "scope": "fixed 2M full B denominator; each checkpoint uses its own live-set GT; prefix size changes, so this is descriptive, not an isolated causal effect"
+  },
+  "0.9": {
+    "inserted": [
+      0,
+      50000,
+      100000,
+      150000,
+      200000
+    ],
+    "expanded": [
+      87.04282191780818,
+      85.725,
+      88.14643216080398,
+      94.17253333333333,
+      95.08599999999993
+    ],
+    "increase_vs_R1": [
+      -0.009874318743521182,
+      -0.02486474868818267,
+      0.0026794199751023484,
+      0.07122726111018363,
+      0.08161808697854056
+    ],
+    "step_change_pp": [
+      -1.4990429944661487,
+      2.754416866328502,
+      6.854784113508128,
+      1.0390825868356934
+    ],
+    "strictly_increasing_all_checkpoints": false,
+    "nondecreasing_all_checkpoints": false,
+    "net_change_pp": 9.149240572206175,
+    "scope": "fixed 2M full B denominator; each checkpoint uses its own live-set GT; prefix size changes, so this is descriptive, not an isolated causal effect"
+  }
+}

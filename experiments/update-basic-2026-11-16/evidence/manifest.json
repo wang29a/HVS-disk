@@ -1,0 +1,167 @@
+{
+  "scope": "Selected immutable validation evidence; full runtime and datasets remain outside Git",
+  "files": [
+    {
+      "file": "g0/status.json",
+      "source": "runtime/g0-attempt2/status.json",
+      "bytes": 65,
+      "sha256": "a901ed0a8b12b881fc6b928f8b234b07f512cf7a1cec8c5b642552aa38d1ba87"
+    },
+    {
+      "file": "g0/build-identity.json",
+      "source": "runtime/g0-attempt2/build-identity.json",
+      "bytes": 3944,
+      "sha256": "fed7e8d2b20250a9dc9cd50243d3c934be3274e72b751b300043f1e823de70f3"
+    },
+    {
+      "file": "g0/store-smoke.txt",
+      "source": "runtime/g0-attempt2/store-smoke.log",
+      "bytes": 40,
+      "sha256": "3f9da45648c819abde61d91f731358cde5f017661a74fbec83a01d117168c604"
+    },
+    {
+      "file": "g0/upstream-insert-search.txt",
+      "source": "runtime/g0-attempt2/upstream-insert-search.log",
+      "bytes": 8617,
+      "sha256": "9149a248eb9eea1056e0b088bdfc7220273ec468997ae197a1b073844e86065f"
+    },
+    {
+      "file": "prune/status.json",
+      "source": "runtime/prune-gate/status.json",
+      "bytes": 78,
+      "sha256": "74dfaae3b07933639f84835d653afcd1f5ec97c67fafdb6a009284313cafd9a9"
+    },
+    {
+      "file": "prune/build-identity.json",
+      "source": "runtime/prune-gate/build-identity.json",
+      "bytes": 1553,
+      "sha256": "2e0a746ef306de6c35e691295c0d3a8543bc9043c0af7b06d2007103a52600af"
+    },
+    {
+      "file": "prune/semantic-replay.txt",
+      "source": "runtime/prune-gate/semantic-replay.log",
+      "bytes": 45,
+      "sha256": "713d6c440764166d1b70b51d4a5ecf5282cedc06fdb795622272a04b3fa5f312"
+    },
+    {
+      "file": "g1/status.json",
+      "source": "runtime/g1-in-degree-protection-v2/status.json",
+      "bytes": 155,
+      "sha256": "ed4b6d7c2c424cb3efe9143e145cebc181cbb5c3fbd06c22491c29cf692a3a18"
+    },
+    {
+      "file": "g1/build-identity.json",
+      "source": "runtime/g1-in-degree-protection-v2/build-identity.json",
+      "bytes": 3973,
+      "sha256": "fe1f26593efed4ad699b23b45a530cb806c6e8b76cb4085de41b5d59816dcc28"
+    },
+    {
+      "file": "g1/in-degree-guard-directed.txt",
+      "source": "runtime/g1-in-degree-protection-v2/in-degree-guard-directed.log",
+      "bytes": 87,
+      "sha256": "c1b30b043e045a36d895c1c77a707878e43bdb75f73d602f0823dc7e289ab368"
+    },
+    {
+      "file": "g1/entry-parity-identity.json",
+      "source": "runtime/g1-in-degree-protection-v2/entry-parity-identity.json",
+      "bytes": 364,
+      "sha256": "00d0d9f37a4b336bdacfa0a41979f620779036379913f34a6a73d3d99fb62e5b"
+    },
+    {
+      "file": "large-replay/result.json",
+      "source": "runtime/degree-validation/result.json",
+      "bytes": 3886,
+      "sha256": "58bfca300a8e9737cc455ba2338556993ab38f551963dbf25aedd5838227b6f6"
+    },
+    {
+      "file": "large-replay/build-identity.json",
+      "source": "runtime/degree-validation/build-identity.json",
+      "bytes": 2733,
+      "sha256": "27dedd76decabb162fe1cbff4dafcf06aea7629a6c94743752e5dd1045f4a7fd"
+    },
+    {
+      "file": "large-replay/original-42.json",
+      "source": "runtime/degree-validation/original-42.json",
+      "bytes": 2921,
+      "sha256": "15690718331406ac514d48fa35b9506bb29220bf4306e494b4a28482b7ee2e32"
+    },
+    {
+      "file": "concurrency/sanitizers.json",
+      "source": "runtime/degree-validation/sanitizers.json",
+      "bytes": 2754,
+      "sha256": "3cca47cb2cfefa47060f01da27db117975338aaffdcbc24ef5344bbfd4f1372b"
+    },
+    {
+      "file": "pq-encoding/identity.json",
+      "source": "runtime/online-pq-audit-v1/identity.json",
+      "bytes": 6709,
+      "sha256": "3d4dce496d64186b01532af650cf8278524d05746e724d5424e07f2ab410e073"
+    },
+    {
+      "file": "pq-encoding/distances.json",
+      "source": "runtime/online-pq-audit-v1/pq-mismatch-distance-diagnostic.json",
+      "bytes": 1192,
+      "sha256": "cc0db707236f083233c3c961be14cc06e5e6f986b3b8f832b3e73f3e02994b4f"
+    },
+    {
+      "file": "e1/progress-snapshot.json",
+      "source": "runtime/checkpoint-git-snapshot.json",
+      "bytes": 47374,
+      "sha256": "bcdc6406014c8772ec735896bbdcf9479a583dcdaa9aeebff01099df66711631"
+    },
+    {
+      "file": "e1/build-identity.json",
+      "source": "runtime/e1-degree-protected-v2/build-identity.json",
+      "bytes": 3367,
+      "sha256": "70ca84f669c7f3d6130adf067b57d3b5a0a9e68983f8b7d01535a1c3a2bf6a15"
+    },
+    {
+      "file": "e1/measurement-reuse.json",
+      "source": "runtime/e1-degree-protected-v2/reused-native-measurements.json",
+      "bytes": 3957,
+      "sha256": "216dc28e60f19e9680210b83787ac690e7d160e084e62938b1d107e5b4f9b671"
+    },
+    {
+      "file": "e1/pq-r1-trend.json",
+      "source": "runtime/e1-degree-protected-v2/summary/pq-expansion-trend-r1.json",
+      "bytes": 4228,
+      "sha256": "c767ebccd20c9ae190852dc3021913da69d04de6c25d7b29f7126fb0b7beba6a"
+    },
+    {
+      "file": "g1/pq/structural-audit.jsonl",
+      "source": "runtime/g1-in-degree-protection-v2/pq/structural-audit.jsonl",
+      "bytes": 214217,
+      "sha256": "537220c748c265ce99f0de6478a5f9bb0d8346f32f174caa1819f85db55f8b34"
+    },
+    {
+      "file": "g1/pq/operations.jsonl",
+      "source": "runtime/g1-in-degree-protection-v2/pq/operations.jsonl",
+      "bytes": 46353,
+      "sha256": "e186ac986768a67ee5d8e633c96588ccef72f206f65d1628e3d896ef50a96a60"
+    },
+    {
+      "file": "g1/G1-pq.txt",
+      "source": "runtime/g1-in-degree-protection-v2/G1-pq.log",
+      "bytes": 2708,
+      "sha256": "e8cdede4adf01e8131a319e24e276f64fdac538cc5419ec1aef8ac2941219e9f"
+    },
+    {
+      "file": "g1/exact/structural-audit.jsonl",
+      "source": "runtime/g1-in-degree-protection-v2/exact/structural-audit.jsonl",
+      "bytes": 214217,
+      "sha256": "537220c748c265ce99f0de6478a5f9bb0d8346f32f174caa1819f85db55f8b34"
+    },
+    {
+      "file": "g1/exact/operations.jsonl",
+      "source": "runtime/g1-in-degree-protection-v2/exact/operations.jsonl",
+      "bytes": 46353,
+      "sha256": "e186ac986768a67ee5d8e633c96588ccef72f206f65d1628e3d896ef50a96a60"
+    },
+    {
+      "file": "g1/G1-exact.txt",
+      "source": "runtime/g1-in-degree-protection-v2/G1-exact.log",
+      "bytes": 2710,
+      "sha256": "2e6f26a46d48b39c836f85ee07d2093487ef9acd4402563cf3b1c86636833338"
+    }
+  ]
+}
