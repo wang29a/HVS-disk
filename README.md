@@ -86,3 +86,28 @@ Full、Merge、No-alpha 的记录宽度不同，必须各自生成 partition；�
 `run_search.sh` 是旧 mode 3 的参数示例，不是三方案重排搜索的通用入口。第一次运行优先使用文档中的明确命令。
 
 进一步开发时阅读 [AGENTS.md](AGENTS.md) 和[代码与索引参考](docs/implementation.md)。旧的机器路径、逐轮测试数字和故障记录保存在[历史交接记录](docs/archive/handoff-notes-2026-09.md)，不作为当前使用入口。
+
+## Rebuild the experiment programs
+
+On x86-64 Linux, install GCC 11 or newer, CMake 3.16 or newer, Make or Ninja, Git, Python 3.6 or newer, OpenMP, Boost headers, libaio and jemalloc development packages, and a CBLAS development package such as OpenBLAS. Invoke the following from a clean checkout.
+
+```bash
+CC=gcc CXX=g++ HVS_BUILD_JOBS=8 ./scripts/build_experiments.sh build-experiments
+```
+
+The script uses no dataset or previously compiled experiment archive. It pins the official OdinANN and DEG reference commits and builds the original CMake executables, the experiment executables, and the isolated builder and diagnostic variants. External sources are fetched at their fixed commits into the build directory. To build offline, provide the pinned clean Git checkouts through `HVS_ODIN_SOURCE_DIR` and `HVS_DEG_SOURCE_DIR`. A pinned DEG source archive without Git metadata is also accepted after the upstream file hash check. Standard CMake arguments after the build directory configure dependency discovery. For a custom BLAS, pass `-DHVS_CBLAS_INCLUDE_DIR=<directory>` and `-DBLAS_LIBRARIES=<library>` as required. Keep the same configured include directory and ABI for both projects.
+
+Core executables are under `build-experiments/tests/` and `build-experiments/tests/utils/`. The experiment programs are namespaced under `build-experiments/bin/experiments/<experiment>/`. The official OdinANN builder is under `build-experiments/odinann/tests/`. Generated variants live entirely in the build tree. For the root library and existing tests only, use the usual CMake configure/build with `HVS_BUILD_EXPERIMENTS=OFF`.
+
+The portable build does not launch workloads. Historical runners and validation records preserve their original dataset identities, workload parameters and server-specific run paths. Prepare the required graph and GT assets separately and select device, NUMA binding and output paths when running an experiment. See [static experiment inventory](experiments/STATIC-INVENTORY.md) for the relevant entry points and graph variants.
+
+## Reproduce E1 and E2 figures
+
+```bash
+python3 -m pip install 'matplotlib>=3.6'
+python3 scripts/plot_update_results.py \
+  --e1-archive /path/to/archived-e1 \
+  --e2-archive /path/to/archived-e2 --output /path/to/figures
+```
+
+Export JSON summaries only. For E1, retain `identity.json`, `variants-complete.json`, `reference-R1/matched.json` and each recorded checkpoint's `matched.json`, `structure.json` and, after inserts, `update-summary.json`. For E2, retain `E2/trajectories.json` and `R2/{matched,structure}.json`. The script reads the input directories and writes 300-dpi PNG and vector PDF to the separate output directory. Curves show means and observed min–max within a plotted point. R1 is shown at the matched-size 2M E1 endpoint. The E2 plots retain the archived run counts, and insertion throughput comes from E1 batches.

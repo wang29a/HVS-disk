@@ -1,7 +1,8 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.16)
 project(pipeann)
 
-set(CMAKE_STANDARD 17)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 option(USE_AIO "Use AIO instead of liburing" ON)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -12,7 +13,6 @@ include_directories(
 	${PROJECT_SOURCE_DIR}/include 
 	${PROJECT_SOURCE_DIR}/include/tsl/include 
 )
-include_directories(/usr/include/mkl)
 if(CMAKE_BUILD_TYPE MATCHES "Debug")
     message(STATUS "Enabling AddressSanitizer (ASan)")
 
@@ -145,7 +145,14 @@ else()
 endif()
 
 	
-find_package(BLAS)
+find_package(BLAS REQUIRED)
+find_path(HVS_CBLAS_INCLUDE_DIR NAMES cblas.h mkl_cblas.h
+    PATH_SUFFIXES openblas openblas-pthread openblas-openmp mkl
+    DOC "Directory containing the CBLAS headers")
+if(NOT HVS_CBLAS_INCLUDE_DIR)
+    message(FATAL_ERROR "CBLAS headers required. Install a BLAS development package or set HVS_CBLAS_INCLUDE_DIR.")
+endif()
+include_directories("${HVS_CBLAS_INCLUDE_DIR}")
 if(BLAS_FOUND)
     message(STATUS "BLAS found")
     link_libraries(${BLAS_LIBRARIES})
@@ -165,4 +172,8 @@ endif()
 add_subdirectory(src)
 add_subdirectory(tests)
 add_subdirectory(tests/utils)
+option(HVS_BUILD_EXPERIMENTS "Build archived C++ experiment programs" OFF)
+if(HVS_BUILD_EXPERIMENTS)
+    add_subdirectory(experiments)
+endif()
 # add_subdirectory(python)
