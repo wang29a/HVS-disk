@@ -131,7 +131,7 @@ foreach(file IN LISTS archived_cpp)
     else()
         target_link_libraries("${LAST_EXPERIMENT}" PRIVATE pipeann Threads::Threads)
     endif()
-    if(group STREQUAL V3 AND name STREQUAL "static_query")
+    if((group STREQUAL V3 OR group STREQUAL IO2) AND name STREQUAL "static_query")
         target_compile_definitions("${LAST_EXPERIMENT}" PRIVATE
             HVS_ORIGINAL_QUERY_SOURCE="${CMAKE_CURRENT_SOURCE_DIR}/multigraph-20261113/scripts/multigraph.cpp")
     endif()
