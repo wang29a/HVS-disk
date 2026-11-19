@@ -53,13 +53,13 @@ def generate(repo, out, author):
     u = ex / "u-shape-20261113/scripts"
     transforms = load_functions(u / "prepare_specialized.py", ["specialize"], {"re": re})
     load_functions(u / "prepare_pruning_v2.py", ["corrected_intervals", "direct_fixed"], transforms)
-    shared = (scratch / "variant/hybrid_index.cpp").read_text()
+    shared = (scratch / "variant/hybrid_index.cpp").read_text(encoding="utf-8")
     unified = transforms["corrected_intervals"](shared)
     emit(out, "unified.cpp", unified)
     emit(out, "fixed.cpp", transforms["direct_fixed"](unified))
     emit(out, "fixed-v1.cpp", transforms["specialize"](shared))
 
-    builder = (ex / "laion-six-cell-20261111/scripts/build_graph.cpp").read_text()
+    builder = (ex / "laion-six-cell-20261111/scripts/build_graph.cpp").read_text(encoding="utf-8")
     anchor = 'throw std::runtime_error("graph target");'
     build_v2 = 'extern "C" void hvs_write_pruning_stats(const char *);\n' + once(
         builder, anchor, anchor + '\n    hvs_write_pruning_stats((std::string(argv[8])+"/pruning-counters.json").c_str());')
@@ -85,16 +85,16 @@ def generate(repo, out, author):
     for variant, counting in (("plain", False), ("counted", True)):
         fn = load_functions(edbt / "compile_native.py", ["transform"], {"re": re})["transform"]
         emit(out, f"native-{variant}.cpp",
-             fn((repo / "src/search/beam_search.cpp").read_text(), counting))
+             fn((repo / "src/search/beam_search.cpp").read_text(encoding="utf-8"), counting))
     relaxed = load_functions(edbt / "compile_relaxed.py", ["transform"], {})["transform"]
     emit(out, "relaxed.cpp", relaxed(unified))
-    member = (u / "test_actual_pruner.cpp").read_text()
+    member = (u / "test_actual_pruner.cpp").read_text(encoding="utf-8")
     member = once(member, '#include "index.h"', '#include "index.h"\n#include "relaxation.h"')
     member = once(member, "dist(p, q) <= dist(0, q)", "hvs_unified_rho() * dist(p, q) <= dist(0, q)")
     member = once(member, "dist(got[j].id_, got[i].id_) <= dist(0, got[i].id_)",
                   "hvs_unified_rho() * dist(got[j].id_, got[i].id_) <= dist(0, got[i].id_)")
     emit(out, "test-relaxed-member.cpp", member)
-    multi = (ex / "multigraph-20261113/scripts/multigraph.cpp").read_text()
+    multi = (ex / "multigraph-20261113/scripts/multigraph.cpp").read_text(encoding="utf-8")
     emit(out, "multigraph32.cpp", once(multi, "threads > 8", "threads > 32"))
 
     v4 = ex / "update-merge-v4"
@@ -105,7 +105,7 @@ def generate(repo, out, author):
                    {"ROOT": v4, "shutil": shutil})["prepare"](prof)
 
     if author:
-        manifest = json.loads((ab.parent / "AUTHOR-UPSTREAM.json").read_text())
+        manifest = json.loads((ab.parent / "AUTHOR-UPSTREAM.json").read_text(encoding="utf-8"))
         for name, digest in manifest["files"].items():
             if hashlib.sha256((author / name).read_bytes()).hexdigest() != digest:
                 raise ValueError(f"Unexpected pinned DEG source: {name}")
